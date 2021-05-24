@@ -37,6 +37,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     "@nuxtjs/fontawesome",
+  
   ],
   fontawesome: {
         component: "fa",
@@ -51,14 +52,36 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/style-resources",
-    
+    'nuxt-i18n',
+
+    '@nuxtjs/vuetify',
+   
   ],
+  
+  i18n: {
+    locales: [
+      {
+        code: "uz",
+        file: "uz.js"
+      },
+      {
+        code: "ru",
+        file: "ru.js"
+      }
+    ],
+    lazy: true,
+    langDir: "lang/",
+    defaultLocale: "uz"
+  },
+  
   styleResources: {
     scss: ["@assets/scss/*.scss"]
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: "http://mechta-posuda.uz:3000/api"
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
