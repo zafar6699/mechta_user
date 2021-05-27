@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "mechta",
+    title: "ОФИЦИАЛЬНЫЙ ДИСТРИБЬЮТОР В УЗБЕКИСТАНЕ",
     htmlAttrs: {
       lang: "en"
     },
@@ -90,7 +90,7 @@ export default {
     ],
     lazy: true,
     langDir: "lang/",
-    defaultLocale: "uz"
+    defaultLocale: "ru"
   },
   
   styleResources: {

@@ -82,7 +82,7 @@
                             <div class="card-img-in">
                                 <nuxt-link
                                     :to="{
-                                        name: 'product-id___uz',
+                                        name: 'product-id___ru',
                                         params: { id: j._id }
                                     }"
                                 >
