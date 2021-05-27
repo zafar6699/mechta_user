@@ -1,163 +1,161 @@
 <template>
-    <div class="container-about">
-        <h2 class="about-header">Biz haqimizda</h2>
+    <div>
+       <nav class="navbar">
+            <div class="navbar-inner">
+                <div class="office-shop">
+                    <p>
+                        {{ $t("title1") }} <br />
+                        {{ $t("title2") }}
+                    </p>
+                    <h3>{{ $t("slogan") }}</h3>
+                </div>
+                <p class="category-select">
+                    <span>КАТЕГОРИИ</span>
+                    <fa icon="angle-down" class="category-icon" />
+                    <ul class="drop-down">
+                        <li v-for="k in categor" :key="k"
+                         @click="changeCategory(k._id, k.nameUz)"
+                        >
+                             <a href="#2" class="link">{{ k.nameUz }}</a>
+                         </li>
+                    </ul>
+                </p>
+                <div class="contact-language">
+                    <img
+                        class="header-phone-icon"
+                        src="@/assets/image/phone.svg"
+                        alt=""
+                    />
+                    <p class="head-phone-number">+998 (99) 329-14-04</p>
+                    <div class="header-bag-icon">
+                        <img src="@/assets/image/bag.svg" alt="" />
+                        <div class="header-count">
+                            <span>3</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav-link">
+                    <li>
+                        <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/productAbout">{{
+                            $t("lan2")
+                        }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan4") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan5") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan6") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan7") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan8") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan9") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan10") }}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-about">
+            <h2 class="about-header">{{ $t("titleAbout") }}</h2>
 
-        <div class="quotes">
-            <div class="quot"></div>
-            <div class="quot"></div>
-            <div class="quot"></div>
-        </div>
-        <!--  =================== Video and Info text ================ -->
-        <div class="video-vs-info">
-            <div class="info">
-                <p>
-                    Biz,<b> “Mechta”</b> savdo belgisi ostida, Rossiya
-                    Federatsiyasida oshxona buyumlari ishlab chiqaruvchilari
-                    orasida yetakchi mavqega ega bo`lib borayotgan
-                    <b>“Posuda-Lyuks”</b> kompaniyasining O`zbekistondagi rasmiy
-                    distribyutorimiz. Xaridorlarimizga o`ziga xos qulaylik
-                    yaratish, sifatli xizmat ko`rsatish maqsadida
-                    <b>“WWW.MECHTA-POSUDA.UZ”</b> rasmiy internet do`konini
-                    tashkil qildik. Maqsadimiz - xaridorlarga sifatli, hamyonbop
-                    va zamonaviy maxsulotlarni taklif qilish va ularga qulay
-                    shart-sharoitda xizmat ko`rsatishdir.
-                </p>
+            <div class="quotes">
+                <div class="quot"></div>
+                <div class="quot"></div>
+                <div class="quot"></div>
             </div>
-            <div class="video">
-                <iframe
-                    class="youtube-iframe"
-                    width="100%"
-                    height="315"
-                    src="https://www.youtube.com/embed/jeBxS-eDL3M"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                ></iframe>
+            <!--  =================== Video and Info text ================ -->
+            <div class="video-vs-info">
+                <div class="info">
+                    <p>
+                        {{ $t("we") }} <b> {{ $t("mechtaB") }}</b
+                        >{{ $t("we2") }} <b>{{ $t("posudaB") }}</b>
+                        {{ $t("we3") }} <b>{{ $t("linkB") }}</b> {{ $t("we4") }}
+                    </p>
+                </div>
+                <div class="video">
+                    <iframe
+                        class="youtube-iframe"
+                        width="100%"
+                        height="315"
+                        src="https://www.youtube.com/embed/jeBxS-eDL3M"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
+                </div>
             </div>
-        </div>
-        <!-- =============== Img left and info text =================== -->
-        <div class="imgLeft-vs-info">
-            <div class="info">
-                <p>
-                    Sir emaski hozirgi kunda dunyoning barcha mamlakatlari
-                    qatori O`zbekistonda ham an`anaviy bozorlardagi maxsulot
-                    sotish yoki xarid qilish, online tijoratga o`tmoqda. Bizning
-                    fikrimizcha online tijoratning rivojlanishiga sabab -
-                    xaridor ko`p vaqt, energiya va ortiqcha mablag` sarflamagan
-                    holda, o`zining istagidagi buyum yoki xizmatni bir lahzada
-                    internet do`konlaridan, maxsus saytlardan, ijtimoiy
-                    tarmoqlardagi ilovalardan xarid qilmoqda. Shuningdek yuridik
-                    yoxud jismoniy shaxslar ham maxsulot yoki xizmatlarini
-                    internet sahifalari orqali chegara bilmas darajada taklif
-                    qilyapti va faoliyatini samarali davom ettiryapti. Bir so`z
-                    bilan aytganda - online tijorat kundalik turmushimizning
-                    ajralmas bir qismiga aylanib boryapti. Shu maqsadda biz ham
-                    an`anaviy bozorlardagi faoliyatimiz bilan bir qatorda online
-                    tijoratni ham amalga oshirmoqdamiz.
-                </p>
+            <!-- =============== Img left and info text =================== -->
+            <div class="imgLeft-vs-info">
+                <div class="info">
+                    <p>
+                        {{ $t("paragraph8") }}
+                    </p>
+                </div>
+                <div class="img-left">
+                    <img
+                        class="shadow-left"
+                        src="@/assets/image/iron.jpg"
+                        alt=""
+                    />
+                </div>
             </div>
-            <div class="img-left">
-                <img class="shadow-left" src="@/assets/image/iron.jpg" alt="" />
-            </div>
-        </div>
 
-        <!-- =============== Img right and info text =================== -->
-        <div class="imgRight-vs-info">
-            <div class="info">
-                <p>
-                    Shu o`rinda muhim bir ma`lumotni ta`kidlashni joiz topdik.
-                    Fikrimizcha hozirda faoliyat yuritayotgan internet
-                    do`konlarni ikki guruhga ajratsa bo`ladi. Birinchi guruh -
-                    maxsulot ishlab chiqaruvchining yoki uning rasmiy
-                    hamkorining internet do`koni. Ikkinchi guruh - maxsulot
-                    ishlab chiqaruvchidan yoki uning rasmiy hamkoridan maxsulot
-                    xarid qilgan holda, ushbu maxsulotni xaridorga taklif
-                    qilayotgan internet do`kon. Tabiiyki maxsulot ishlab
-                    chiqaruvchidan iste`molchiga ortiqcha vositachilarsiz yetib
-                    borsa, tannarx ko`p o`smaydi. Bu ma`lumotni aytishimizni
-                    sababi - xaridorlarimizga anglatmoqchimizki: siz tashrif
-                    buyurgan <b>“WWW.MECHTA-POSUDA.UZ”</b> internet do`koni,
-                    maxsulotni bevosita ishlab chiqaruvchidan xarid qiladi va
-                    siz aziz xaridorlarga hamyonbop narxlarda taklif qiladi.
-                    Sodda qilib aytganda biz sizning so`rovingizga qarab
-                    o`zganing omboridan maxsulot izlamaymiz, o`zimizda borini
-                    taklif qilamiz, siz esa xoxishingizga ko`ra maxsulot tanlab
-                    buyurtma berishingiz mumkin. “Internet sahifalarida yozilgan
-                    ma`lumotlarni hammasini ham to`g`ri deb bo`lmaydi”- deb
-                    o`ylaydigan xaridorlar diqqatiga: ma`lumotlarimizni
-                    isbotlovchi dalil hujjatlarimiz mavjud. Istasangiz
-                    e`tiboringizga havola etamiz.
-                </p>
+            <!-- =============== Img right and info text =================== -->
+            <div class="imgRight-vs-info">
+                <div class="info">
+                    <p>
+                        {{ $t("we5") }}
+                        <nuxt-link to="/">
+                            <b>
+                                {{ $t("linkB") }}
+                            </b>
+                        </nuxt-link>
+                        {{ $t("we6") }}
+                    </p>
+                </div>
+                <div class="img-right">
+                    <img
+                        class="shadow-right"
+                        src="@/assets/image/shop.jpg"
+                        alt=""
+                    />
+                </div>
             </div>
-            <div class="img-right">
-                <img
-                    class="shadow-right"
-                    src="@/assets/image/shop.jpg"
-                    alt=""
-                />
-            </div>
+            <p>
+                {{ $t("we7") }}
+                <b> {{ $t("linkB") }}</b> {{ $t("we8") }}
+                <b>{{ $t("posudaB") }}</b> {{ $t("we9") }}
+                <b>{{ $t("posudaB") }}</b>
+                {{ $t("we10") }}
+            </p>
+            <p>
+                {{ $t("paragraph9") }}
+            </p>
+            <h2 class="shop-team">
+                {{ $t("teamTitle1") }} {{ $t("teamTitle2") }}
+                <nuxt-link to="/">
+                    <b>
+                        {{ $t("linkB") }}
+                    </b>
+                </nuxt-link>
+            </h2>
         </div>
-        <p>
-            Yana bir jihatga to`xtalib o`tish kerakki bu ham xaridorlarimizni
-            qiziqtirishiga ishonchimiz komil. Biz yuqorida online tijoratni
-            ommalashayotganini va afzalliklarini ta`kidlab o`tdik. Lekin shunga
-            qaramasdan iste`molchilarning ko`p qismi an`anaviy bozorlardan
-            xaridni amalga oshiryaptilar. Buning sababiga to`xtaladigan bo`lsak
-            – maxsulot narxining “online bozor”da va an`anaviy bozordagi
-            tafovuti bilan bog`liq. Ochig`ini aytganda aksariyat internet
-            do`konlarida maxsulotning narxi bozor narxidan ancha yuqori.
-            <b>“WWW.MECHTA-POSUDA.UZ”</b> inretnet do`konining yana bir o`ziga
-            xos xususiyati - biz sizga maxsulotlarni bozor narxida taklif
-            qilamiz va maxsulotlar narxi odatdagidan sezilarli farq qilmasligini
-            kafolatlaymiz. Xoxlasangiz bozorlardagi maxsus do`konlarimizga
-            tashrif buyuring va narx borasidagi ma`lumotlarni solishtiring.
-            Umuman olganda <b>“Mechta”</b> savdo belgisi ostida ishlab
-            chiqarilayotgan maxsulotlar, shu kabi turdosh maxsulotlardan sifati,
-            ishlatishga qulayligi, mustahkamligi jihatidan ustun bo`lsada,
-            tannarxi bir muncha arzon. Buning asosiy sabablari: Birinchidan -
-            ushbu maxsulotlarni ishlab chiqaruvchi
-            <b>“Posuda Lyuks”</b> kompaniyasi Rossiya Federatsiyasining Kirov
-            viloyatidagi maxsus iqtisodiy zonada joylashganligi tufayli, soliq
-            imtiyozlariga ega. O`z o`rnida bu soliq imtiyozlari maxsulot
-            tannarxiga ijobiy ta`sir qilgan. Ikkinchidan - ushbu maxsulotlar
-            Rossiyada ishlab chiqarilganligi va ishlab chiqaruvchidan
-            vositachilarsiz to`g`ridan-to`g`ri import qilinganligi uchun aksiz
-            solig`i va davlat bojidan ozod qilingan. Boshqacha qilib aytganda
-            xuddi shu kabi maxsulotlar Xitoy Xalq Respublikasidan yoki Turkiya
-            Jumhuriyatidan import qilinsa, yuqoridagi imtiyozlarga ega bo`lmaydi
-            va bu maxsulot tannarxini o`sishiga olib keladi. Uchinchidan - biz
-            tomonimizdan maxsulotga qo`yilgan qo`shimcha haq miqdorining ozligi
-            ham maxsulot tannarxiga ijobiy ta`sir qilgan. To`rtinchidan –
-            <b>“Posuda Lyuks”</b> kompaniyasi bizni strategik hamkor deb
-            hisoblagani uchun, maxsulotlarini chegirma narxlarda realizatsiya
-            qilayotgani ham asosiy omillardan biridir. Beshinchidan – maxsulotni
-            ishlab chiqaruvchining omboridan toki bizning omborgacha bo`lgan
-            tashish bilan bog`liq sarf-xarajatlarning minimalligidir. Yuqorida
-            aytilgan beshta muhim omil sababli, maxsulotlarimiz tannarxi
-            sifatiga nisbatan birmuncha arzon. Agar nokamtarlik deb
-            o`ylamasangiz bir ma`lumotni keltirsak: agar shu maxsulotlar yevropa
-            yoki dunyoning rivojlangan davlatlarida sotilsa, ishonavering
-            bizdagidan ko`ra 4-5 barobar qimmatga sotiladi.
-        </p>
-        <p>
-            Faoliyatimizni samarali tashkil qilish maqsadida, jamoamizga
-            shijoatli, kreativ, mehnatsevar, o`z ishiga sadoqat bilan
-            yondashadigan, zamon bilan hamnafas a`zolarni jalb qilganmiz. Ahil
-            jamoamiz a`zolari tomonidan har bir ishga professional va ijodkorona
-            yondashuv siz xaridorlarning ishonchini qozonadi degan umiddamiz.
-            E`tiboringizga o`zimiz haqimizda qisqacha ma`lumot berdik. So`zimiz
-            yakunida guruhimiz shioriga aylangan ibratli iborani aytmoqchimiz:
-            “Birovga sog`insa har kim yomonlik, nihoyat ul o`zi topmas omonlik”.
-            Ya`ni bozor raqobati sharoitida hammani ham insofli sotuvchi, xolis
-            ma`lumot beruvchi deb bo`lmaydi. Bizning oliy maqsadimiz –
-            xaridorlarimizni xoxish-istagini anglagan holda, ularga sifatli
-            maxsulot yetkazib berish va bu faoliyatimiz natijasida ham xaridor
-            ishonchini qozonish, ham moddiy manfaat ko`rishdir.
-        </p>
-        <h2 class="shop-team">
-            Hurmat bilan <b>“MECHTA-POSUDA.UZ”</b> online do`koni jamoasi.
-        </h2>
     </div>
 </template>
 
@@ -165,7 +163,7 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 // Global styles
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 * {

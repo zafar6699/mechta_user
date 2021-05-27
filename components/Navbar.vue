@@ -1,14 +1,25 @@
 <template>
     <div>
-        <header>
-            <nav class="header-nav">
-                <div class="logo">
-                    <img src="@/assets/image/logo.svg" alt="" />
-                </div>
+        <nav class="navbar">
+            <div class="navbar-inner">
                 <div class="office-shop">
-                    <p>{{ $t("title") }}</p>
+                    <p>
+                        {{ $t("title1") }} <br />
+                        {{ $t("title2") }}
+                    </p>
                     <h3>{{ $t("slogan") }}</h3>
                 </div>
+                <p class="category-select">
+                    <span>КАТЕГОРИИ</span>
+                    <fa icon="angle-down" class="category-icon" />
+                    <ul class="drop-down">
+                        <li v-for="k in categor" :key="k"
+                         @click="changeCategory(k._id, k.nameUz)"
+                        >
+                             <a href="#2" class="link">{{ k.nameUz }}</a>
+                         </li>
+                    </ul>
+                </p>
                 <div class="contact-language">
                     <img
                         class="header-phone-icon"
@@ -16,30 +27,10 @@
                         alt=""
                     />
                     <p class="head-phone-number">+998 (99) 329-14-04</p>
-
-                    <button @click="selectLan" class="select-language ">
-                        <h6 v-if="$i18n.locale == 'uz'">uz</h6>
-                        <h6 v-if="$i18n.locale == 'ru'">ру</h6>
-                        <fa icon="angle-down" class="down-icon" />
-
-                        <ul v-if="classLan">
-                            <li>
-                                <a
-                                    href="#"
-                                    @click.prevent="$i18n.setLocale('uz')"
-                                    >UZ</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    @click.prevent="$i18n.setLocale('ru')"
-                                    >RU</a
-                                >
-                            </li>
-                        </ul>
-                    </button>
-
+                    <select name="#" id="#">
+                        <option value="#">uz</option>
+                        <option value="#">ру</option>
+                    </select>
                     <div class="header-bag-icon">
                         <img src="@/assets/image/bag.svg" alt="" />
                         <div class="header-count">
@@ -47,60 +38,56 @@
                         </div>
                     </div>
                 </div>
-            </nav>
-            <select name="#" id="#" class="mobile-select">
-                <option value="#">uz</option>
-                <option value="#">ру</option>
-            </select>
-            <div class="burger">
-                <span class="line1"></span>
-                <span class="line2"></span>
-                <span class="line3"></span>
+                <ul class="nav-link">
+                    <li>
+                        <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/productAbout">{{
+                            $t("lan2")
+                        }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan4") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan5") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan6") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan7") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan8") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan9") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan10") }}</a>
+                    </li>
+                </ul>
             </div>
-        </header>
+        </nav>
     </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            classLan: false,
-            lan: "uz"
-        };
-    },
-
-    methods: {
-        selectLan() {
-            this.classLan = !this.classLan;
-        }
-    },
-    async mounted() {
-        const nav = document.querySelector(".navbar");
-        const burger = document.querySelector(".burger");
-        const links = nav.querySelectorAll("a");
-
-        burger.addEventListener("click", () => {
-            nav.classList.toggle("nav-open");
-            burger.classList.toggle("toggle");
-        });
-
-        links.forEach(link => {
-            link.addEventListener("click", () => {
-                nav.classList.toggle("nav-open");
-                burger.classList.toggle("toggle");
-            });
-        });
-    }
-};
+export default {};
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 li {
     list-style-type: none;
@@ -112,141 +99,105 @@ html,
 body {
     overflow-x: hidden;
 }
-// ========== Header section ===========
-
-header {
-    background: #148e3c;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    width: 100%;
+.transition{
+    transition: all 1s ease-in-out;
 }
-.header-nav {
+// center default | Don't delete.
+main {
     width: 90%;
-    height: 79px;
+    margin: 0 auto;
+}
+// ================ NAvbar section =============
+.navbar {
+    background-color: #ffffff;
+    margin-top: 79px;
+}
+.navbar-inner {
+    width: 90%;
+    height: 60px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // border: 1px solid;
-}
-.logo {
-    height: 60px;
-}
-.office-shop {
-    // border: 1px solid;
-    p {
-        font-family: "Roboto Bold", sans-serif;
-        color: #fff;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 110%;
+    .office-shop {
+        display: none;
     }
-    h3 {
-        font-family: "Lobster", cursive;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 24px;
-        line-height: 30px;
-        color: #e7ea09;
-        text-align: center;
+    .contact-language {
+        display: none;
     }
 }
-.contact-language {
-    // border: 1px solid;
+.category-select {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .header-phone-icon {
-        margin-right: 20px;
+    flex: 1 1 10rem;
+    margin-right: 40px;
+    font-family: "Roboto Bold", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #148e3c;
+    position: relative;
+    cursor: pointer;
+    .drop-down {
+        border-radius: 5px;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        display: none;
+        z-index: 10;
+        background-color: rgba($color: #148e3c, $alpha: 0.7);
+        li {
+            padding: 4px 16px;
+            border-bottom: 0.5px solid rgba($color: #000000, $alpha: 0.5);
+            transition: all 0.5s ease-in-out;
+            &:hover {
+                background-color: rgba($color: #fff, $alpha: 0.9);
+                .link {
+                    color: #148e3c!important;
+                }
+            }
+            &:last-child {
+                border-bottom: none;
+            }
+            .link {
+                color: #fff !important;
+                font-size: 16px;
+                font-weight: 400;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                    "Helvetica Neue", sans-serif;
+            }
+        }
     }
-    .head-phone-number {
+    &:hover {
+        .drop-down {
+            display: block;
+        }
+    }
+}
+.category-icon {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    flex: 5 1 100rem;
+
+    li {
         font-family: "Roboto Bold", sans-serif;
         font-style: normal;
         font-weight: 500;
-        font-size: 18px;
-        line-height: 21px;
-        color: #ffffff;
-        margin-right: 20px;
-    }
-    .header-bag-icon {
-        position: relative;
-        .header-count {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 13px;
-            height: 13px;
-            border-radius: 15px;
-            background: #f7fa00;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            span {
-                display: block;
-                color: black;
-                font-family: "Roboto Bold", sans-serif;
-                font-style: normal;
-                font-weight: 500;
-                font-size: 12px;
-                line-height: 14px;
-            }
+        font-size: 15px;
+        line-height: 19px;
+        a {
+            color: #666666;
         }
     }
 }
-
-.mobile-select {
-    display: none;
-}
-.burger {
-    display: none;
-    cursor: pointer;
-}
-
-button.select-language {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    border: none;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    position: relative;
-    color: #fff;
-    font-size: 24px;
-    letter-spacing: 1px;
-    .down-icon {
-        margin-left: 8px;
-        color: #e7ea09;
-    }
-    ul {
-        position: absolute;
-        width: 60px;
-        border-radius: 3px;
-        list-style-type: none;
-        left: 0;
-        top: 25px;
-        padding-left: 0px;
-        margin-bottom: 0px;
-        background-color: #fff;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        li {
-            padding: 5px 10px 5px 3px;
-            transition: all 0.5s ease;
-            a {
-                color: rgb(85, 82, 82);
-                font-size: 16px;
-            }
-            &:hover {
-                background-color: #148e3c;
-                a {
-                    color: #fff;
-                }
-            }
-        }
-    }
-}
+// ================== Responsive ========================
 
 ////// ================  header && navbar media ==============
 

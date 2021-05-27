@@ -1,5 +1,75 @@
 <template>
     <div :class="{ body: isBody }">
+       <nav class="navbar">
+            <div class="navbar-inner">
+                <div class="office-shop">
+                    <p>
+                        {{ $t("title1") }} <br />
+                        {{ $t("title2") }}
+                    </p>
+                    <h3>{{ $t("slogan") }}</h3>
+                </div>
+                <p class="category-select">
+                    <span>КАТЕГОРИИ</span>
+                    <fa icon="angle-down" class="category-icon" />
+                    <ul class="drop-down">
+                        <li v-for="k in categor" :key="k"
+                         @click="changeCategory(k._id, k.nameUz)"
+                        >
+                             <a href="#2" class="link">{{ k.nameUz }}</a>
+                         </li>
+                    </ul>
+                </p>
+                <div class="contact-language">
+                    <img
+                        class="header-phone-icon"
+                        src="@/assets/image/phone.svg"
+                        alt=""
+                    />
+                    <p class="head-phone-number">+998 (99) 329-14-04</p>
+                    <div class="header-bag-icon">
+                        <img src="@/assets/image/bag.svg" alt="" />
+                        <div class="header-count">
+                            <span>3</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav-link">
+                    <li>
+                        <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/productAbout">{{
+                            $t("lan2")
+                        }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan4") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan5") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan6") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan7") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan8") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan9") }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ $t("lan10") }}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <!-- Full cover order click -->
         <div
             :class="{ fullCover: active, orderActive: orderIsActive }"
@@ -30,18 +100,8 @@
 
                         <div class="form-input">
                             <label for="#">Viloyat</label>
-                            <v-container fluid>
-                                <v-row align="center">
-                                    <v-col class="d-flex" cols="12" sm="6">
-                                        <v-select
-                                            :items="items"
-                                            label="Outlined style"
-                                            outlined
-                                        ></v-select>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                            <!-- <div class="custom-select">
+
+                            <div class="custom-select">
                                 <select class="select">
                                     <option value="#">Toshkent shahar</option>
                                     <option value="#">Toshkent viloyati</option>
@@ -67,7 +127,7 @@
                                     >
                                 </select>
                                 <span class="custom-arrow"></span>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="form-input">
                             <label for="#">Manzil</label>
@@ -121,16 +181,16 @@
                             }}</span>
                         </h3>
                         <p>
-                            Размер:<span class="size" v-if="product != null">{{
+                            {{ $t("size")
+                            }}<span class="size" v-if="product != null">{{
                                 product.size
                             }}</span>
                         </p>
                         <p>
-                            Диаметр:<span
-                                class="diameter"
-                                v-if="product != null"
-                                >{{ product.diametr }}</span
-                            >
+                            {{ $t("diameter")
+                            }}<span class="diameter" v-if="product != null">{{
+                                product.diametr
+                            }}</span>
                         </p>
                         <h3 class="price" v-if="price != null">
                             {{ price }}
@@ -140,7 +200,7 @@
                     <div class="buy">
                         <div class="sum-color">
                             <div class="sum">
-                                <span>Количество:</span>
+                                <span>{{ $t("num") }}</span>
                                 <div class="sum-btn">
                                     <button type="button" @click="remove()">
                                         -
@@ -155,7 +215,7 @@
                             </div>
                             <!-- =================== Color section ========================= -->
                             <div class="color">
-                                <span>цвет:</span>
+                                <span>{{ $t("color") }}</span>
                                 <div class="color-btn">
                                     <div
                                         :class="{
@@ -174,10 +234,10 @@
                         <!-- ================= Order section ======================= -->
                         <div class="buy-btn">
                             <button type="button">
-                                <span></span> В Корзину
+                                <span></span>{{ $t("savat") }}
                             </button>
                             <button type="button" @click="orderAdd()">
-                                <span></span> Заказать В Один Клик
+                                <span></span> {{ $t("oneBuy") }}
                             </button>
                         </div>
                     </div>
@@ -189,10 +249,10 @@
             <div class="tab">
                 <div class="tab-btn">
                     <div id="note" class="note btn-active">
-                        <span>Izoh</span>
+                        <span>{{ $t("note") }}</span>
                     </div>
                     <div id="character" class="character">
-                        <span>Xarakteristika</span>
+                        <span> {{ $t("description") }}</span>
                     </div>
                 </div>
                 <div class="tab-content">
@@ -236,10 +296,10 @@
                             <p class="info-pro">
                                 {{ item.nameUz }}
                             </p>
-                            <span>Seriya granit</span>
+                            <span>{{ $t("lan15") }}</span>
                             <div class="price-savat">
                                 <p class="price">{{ item.price }} Сум</p>
-                                <button type="button">В Корзину</button>
+                                <button type="button">{{ $t("savat") }}</button>
                             </div>
                         </div>
                     </div>
@@ -362,7 +422,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
     margin: 0;
@@ -910,6 +970,69 @@ main {
   */
 
 @media (min-width: 768px) and (max-width: 1024px) {
+    .body{
+        margin-top: 90px;
+    }
+    //================== Navbar Section ==============
+    .nav-link li {
+        font-size: 14px;
+    }
+    .navbar {
+        background: #148e3c!important;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100vh;
+        transition: transform 1s ease;
+        z-index: 3;
+    }
+    .navbar-inner {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .office-shop {
+            display: block!important;
+            p {
+                line-height: 22px;
+            }
+        }
+    }
+    .category-select {
+        color: #fff;
+    }
+    .nav-link {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+
+        li {
+            width: 100%;
+            height: 30px;
+            border-bottom: 1px solid #077507;
+            cursor: pointer;
+            a {
+                color: white!important;
+                font-size: 18px;
+            }
+        }
+        li:nth-child(1) a {
+            color: #e7ea09;
+        }
+    }
+
+    .nav-link a {
+        color: white!important;
+        font-size: 18px;
+    }
+    .nav-open {
+        transform: translateX(-100%);
+    }
     // Product image price
     .pro-img div {
         width: 250px;
@@ -951,6 +1074,69 @@ main {
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
+    .body{
+        margin-top: 90px;
+    }
+    //================== Navbar Section ==============
+    .nav-link li {
+        font-size: 14px;
+    }
+    .navbar {
+        background: #148e3c!important;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100vh;
+        transition: transform 1s ease;
+        z-index: 3;
+    }
+    .navbar-inner {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .office-shop {
+            display: block!important;
+            p {
+                line-height: 22px;
+            }
+        }
+    }
+    .category-select {
+        color: #fff;
+    }
+    .nav-link {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+
+        li {
+            width: 100%;
+            height: 30px;
+            border-bottom: 1px solid #077507;
+            cursor: pointer;
+            a {
+                color: white!important;
+                font-size: 18px;
+            }
+        }
+        li:nth-child(1) a {
+            color: #e7ea09;
+        }
+    }
+
+    .nav-link a {
+        color: white!important;
+        font-size: 18px;
+    }
+    .nav-open {
+        transform: translateX(-100%);
+    }
     // Product image price
     .pro-img-type {
         left: 27px;
@@ -1021,6 +1207,126 @@ main {
     ##Screen = B/w 320px to 479px
   */
 @media (min-width: 320px) and (max-width: 480px) {
+    .body{
+        margin-top: 90px;
+    }
+    .contact-language {
+        margin-right: 66px;
+        .header-phone-icon {
+            width: 12px;
+            margin-right: 10px;
+        }
+        .head-phone-number {
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        select {
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .header-bag-icon {
+            img {
+                width: 27px;
+            }
+        }
+    }
+    .mobile-select {
+        display: block!important;
+        position: absolute;
+        top: 37%;
+        right: 15%;
+        z-index: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: "Roboto Bold", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 21px;
+        color: #ffffff;
+        padding: 0 8px;
+        option {
+            color: #ffffff;
+            background-color: #148e3c;
+            border: none;
+            outline: none;
+        }
+    }
+    .burger {
+        display: block;
+        position: absolute;
+        top: 37%;
+        right: 5%;
+        z-index: 4;
+    }
+    .burger span {
+        padding: 1.5px 13px;
+        background: #fff;
+        margin: 3px 0px;
+        border-radius: 5px;
+        display: block;
+        transition: all 0.5s ease;
+    }
+    .navbar {
+        background: #148e3c!important;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100vh;
+        transition: transform 1s ease;
+        z-index: 3;
+    }
+    .navbar-inner {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .office-shop {
+            display: block!important;
+            p {
+                line-height: 22px;
+            }
+        }
+        .contact-language {
+            display: flex!important;
+        }
+    }
+    // .category-select {
+    //     color: #fff;
+    // }
+    .nav-link {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+
+        li {
+            width: 100%;
+            height: 30px;
+            border-bottom: 1px solid #077507;
+            cursor: pointer;
+            a {
+                color: white!important;
+                font-size: 18px;
+            }
+        }
+        li:nth-child(1) a {
+            color: #e7ea09;
+        }
+    }
+
+    .nav-link a {
+        color: white!important;
+        font-size: 18px;
+    }
+    .nav-open {
+        transform: translateX(-100%);
+    }
     // Product image price
     .pro-img-type {
         left: 27px;

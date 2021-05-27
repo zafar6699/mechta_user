@@ -28,11 +28,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/vuetify": "^1.11.3",
-<<<<<<< HEAD
     "nuxt-fontawesome": "^0.4.0"
-=======
-    "nuxt-fontawesome": "^0.4.0",
-    "wowjs": "^1.1.3"
->>>>>>> 01ea97f5cabe383dcda445f871057bf9cf000c1e
   }
 }
