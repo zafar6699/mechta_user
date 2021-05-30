@@ -1,75 +1,6 @@
 <template>
     <div :class="{ body: isBody }">
-       <nav class="navbar">
-            <div class="navbar-inner">
-                <div class="office-shop">
-                    <p>
-                        {{ $t("title1") }} <br />
-                        {{ $t("title2") }}
-                    </p>
-                    <h3>{{ $t("slogan") }}</h3>
-                </div>
-                <p class="category-select">
-                    <span>КАТЕГОРИИ</span>
-                    <fa icon="angle-down" class="category-icon" />
-                    <ul class="drop-down">
-                        <li v-for="k in categor" :key="k"
-                         @click="changeCategory(k._id, k.nameUz)"
-                        >
-                             <a href="#2" class="link">{{ k.nameUz }}</a>
-                         </li>
-                    </ul>
-                </p>
-                <div class="contact-language">
-                    <img
-                        class="header-phone-icon"
-                        src="@/assets/image/phone.svg"
-                        alt=""
-                    />
-                    <p class="head-phone-number">+998 (99) 329-14-04</p>
-                    <div class="header-bag-icon">
-                        <img src="@/assets/image/bag.svg" alt="" />
-                        <div class="header-count">
-                            <span>3</span>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav-link">
-                    <li>
-                        <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="/productAbout">{{
-                            $t("lan2")
-                        }}</nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan4") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan5") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan6") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan7") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan8") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan9") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan10") }}</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <Header />
         <!-- Full cover order click -->
         <div
             :class="{ fullCover: active, orderActive: orderIsActive }"
@@ -90,11 +21,16 @@
                             <input
                                 type="text"
                                 placeholder="To'liq ismni kiriting"
+                                v-model="name"
                             />
                         </div>
                         <div class="form-input form-number">
                             <label for="#">Telefon raqam</label>
-                            <input type="number" placeholder="Telefon raqam" />
+                            <input
+                                type="number"
+                                placeholder="Telefon raqam"
+                                v-model="phone"
+                            />
                             <span class="number">+998</span>
                         </div>
 
@@ -102,44 +38,71 @@
                             <label for="#">Viloyat</label>
 
                             <div class="custom-select">
-                                <select class="select">
-                                    <option value="#">Toshkent shahar</option>
-                                    <option value="#">Toshkent viloyati</option>
-                                    <option value="#">Andijon viloyati</option>
-                                    <option value="#">Buxoro viloyati</option>
-                                    <option value="#"
-                                        >Surxondaryo viloyati</option
+                                <select class="select" v-model="region">
+                                    <option value="Toshkent shahar"
+                                        >Toshkent shahar</option
                                     >
-                                    <option value="#"
-                                        >Qashqadaryo viloyati</option
+                                    <option value="Toshkent viloyati"
+                                        >Toshkent viloyati</option
                                     >
-                                    <option value="#">Xorazm viloyati</option>
-                                    <option value="#">Namangan viloyati</option>
-                                    <option value="#">Farg'ona viloyati</option>
-                                    <option value="#"
+                                    <option value="Andijon viloyati"
+                                        >Andijon viloyati</option
+                                    >
+                                    <option value="Buxoro viloyati"
+                                        >Buxoro viloyati</option
+                                    >
+                                    <option value="Surxondaryo viloyati">
+                                        Surxondaryo viloyati
+                                    </option>
+                                    <option value="Qashqadaryo viloyati">
+                                        Qashqadaryo viloyati
+                                    </option>
+                                    <option value="Xorazm viloyati"
+                                        >Xorazm viloyati</option
+                                    >
+                                    <option value="Namangan viloyati"
+                                        >Namangan viloyati</option
+                                    >
+                                    <option value="Farg'ona viloyati"
+                                        >Farg'ona viloyati</option
+                                    >
+                                    <option value="Samarqand viloyati"
                                         >Samarqand viloyati</option
                                     >
-                                    <option value="#">Navoiy viloyati</option>
-                                    <option value="#">Jizzax viloyati</option>
-                                    <option value="#">Sirdaryo viloyati</option>
-                                    <option value="#"
-                                        >Qoraqalpoq Respublikasi</option
+                                    <option value="Navoiy viloyati"
+                                        >Navoiy viloyati</option
                                     >
+                                    <option value="Jizzax viloyati"
+                                        >Jizzax viloyati</option
+                                    >
+                                    <option value="Sirdaryo viloyati"
+                                        >Sirdaryo viloyati</option
+                                    >
+                                    <option value="Qoraqalpoq Respublikasi">
+                                        Qoraqalpoq Respublikasi
+                                    </option>
                                 </select>
                                 <span class="custom-arrow"></span>
                             </div>
                         </div>
                         <div class="form-input">
                             <label for="#">Manzil</label>
-                            <input type="text" placeholder="Manzil" />
-                        </div>
-
-                        <div class="form-checkbox">
-                            <input type="checkbox" />
-                            <span>Men hamma shartlarga roziman</span>
+                            <input
+                                type="text"
+                                placeholder="Manzil"
+                                v-model="address"
+                            />
                         </div>
                     </div>
-                    <button type="submit" class="order-button">
+                    <div class="form-checkbox">
+                        <input type="checkbox" />
+                        <span>Men hamma shartlarga roziman</span>
+                    </div>
+                    <button
+                        type="submit"
+                        class="order-button"
+                        @click="submit()"
+                    >
                         Buyurtmani tekshirish
                     </button>
                 </div>
@@ -312,8 +275,12 @@
 export default {
     data() {
         return {
+            // order
+            region: "",
+            address: "",
+            phone: "",
+            name: "",
             // style
-            items: ["Foo", "Bar", "Fizz", "Buzz"],
             active: true,
             rotateActive: 0,
             orderIsActive: false,
@@ -353,6 +320,9 @@ export default {
     },
 
     methods: {
+        submit() {
+            console.log(this.region, this.address, this.phone, this.name);
+        },
         // OrderClick
         orderAdd() {
             this.orderIsActive = true;
@@ -395,8 +365,8 @@ export default {
         this.color[0].img = this.mainImg1;
         this.color[1].img = this.mainImg2;
         this.color[2].img = this.mainImg3;
-        console.log("res images-->", this.image);
-        console.log("res similar-->", this.similarProduct);
+        // console.log("res images-->", this.image);
+        // console.log("res similar-->", this.similarProduct);
 
         // ============ Tab content ================
 
@@ -422,7 +392,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
     margin: 0;
@@ -970,7 +940,7 @@ main {
   */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .body{
+    .body {
         margin-top: 90px;
     }
     //================== Navbar Section ==============
@@ -978,7 +948,7 @@ main {
         font-size: 14px;
     }
     .navbar {
-        background: #148e3c!important;
+        background: #148e3c !important;
         position: fixed;
         top: 0;
         left: 100%;
@@ -997,7 +967,7 @@ main {
         justify-content: space-between;
 
         .office-shop {
-            display: block!important;
+            display: block !important;
             p {
                 line-height: 22px;
             }
@@ -1017,7 +987,7 @@ main {
             border-bottom: 1px solid #077507;
             cursor: pointer;
             a {
-                color: white!important;
+                color: white !important;
                 font-size: 18px;
             }
         }
@@ -1027,7 +997,7 @@ main {
     }
 
     .nav-link a {
-        color: white!important;
+        color: white !important;
         font-size: 18px;
     }
     .nav-open {
@@ -1074,7 +1044,7 @@ main {
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-    .body{
+    .body {
         margin-top: 90px;
     }
     //================== Navbar Section ==============
@@ -1082,7 +1052,7 @@ main {
         font-size: 14px;
     }
     .navbar {
-        background: #148e3c!important;
+        background: #148e3c !important;
         position: fixed;
         top: 0;
         left: 100%;
@@ -1101,7 +1071,7 @@ main {
         justify-content: space-between;
 
         .office-shop {
-            display: block!important;
+            display: block !important;
             p {
                 line-height: 22px;
             }
@@ -1121,7 +1091,7 @@ main {
             border-bottom: 1px solid #077507;
             cursor: pointer;
             a {
-                color: white!important;
+                color: white !important;
                 font-size: 18px;
             }
         }
@@ -1131,7 +1101,7 @@ main {
     }
 
     .nav-link a {
-        color: white!important;
+        color: white !important;
         font-size: 18px;
     }
     .nav-open {
@@ -1207,7 +1177,7 @@ main {
     ##Screen = B/w 320px to 479px
   */
 @media (min-width: 320px) and (max-width: 480px) {
-    .body{
+    .body {
         margin-top: 90px;
     }
     .contact-language {
@@ -1231,7 +1201,7 @@ main {
         }
     }
     .mobile-select {
-        display: block!important;
+        display: block !important;
         position: absolute;
         top: 37%;
         right: 15%;
@@ -1269,7 +1239,7 @@ main {
         transition: all 0.5s ease;
     }
     .navbar {
-        background: #148e3c!important;
+        background: #148e3c !important;
         position: fixed;
         top: 0;
         left: 100%;
@@ -1288,13 +1258,13 @@ main {
         justify-content: space-between;
 
         .office-shop {
-            display: block!important;
+            display: block !important;
             p {
                 line-height: 22px;
             }
         }
         .contact-language {
-            display: flex!important;
+            display: flex !important;
         }
     }
     // .category-select {
@@ -1311,7 +1281,7 @@ main {
             border-bottom: 1px solid #077507;
             cursor: pointer;
             a {
-                color: white!important;
+                color: white !important;
                 font-size: 18px;
             }
         }
@@ -1321,7 +1291,7 @@ main {
     }
 
     .nav-link a {
-        color: white!important;
+        color: white !important;
         font-size: 18px;
     }
     .nav-open {

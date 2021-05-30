@@ -1,75 +1,6 @@
 <template>
     <div>
-       <nav class="navbar">
-            <div class="navbar-inner">
-                <div class="office-shop">
-                    <p>
-                        {{ $t("title1") }} <br />
-                        {{ $t("title2") }}
-                    </p>
-                    <h3>{{ $t("slogan") }}</h3>
-                </div>
-                <p class="category-select">
-                    <span>КАТЕГОРИИ</span>
-                    <fa icon="angle-down" class="category-icon" />
-                    <ul class="drop-down">
-                        <li v-for="k in categor" :key="k"
-                         @click="changeCategory(k._id, k.nameUz)"
-                        >
-                             <a href="#2" class="link">{{ k.nameUz }}</a>
-                         </li>
-                    </ul>
-                </p>
-                <div class="contact-language">
-                    <img
-                        class="header-phone-icon"
-                        src="@/assets/image/phone.svg"
-                        alt=""
-                    />
-                    <p class="head-phone-number">+998 (99) 329-14-04</p>
-                    <div class="header-bag-icon">
-                        <img src="@/assets/image/bag.svg" alt="" />
-                        <div class="header-count">
-                            <span>3</span>
-                        </div>
-                    </div>
-                </div>
-                <ul class="nav-link">
-                    <li>
-                        <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="/productAbout">{{
-                            $t("lan2")
-                        }}</nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan4") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan5") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan6") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan7") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan8") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan9") }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ $t("lan10") }}</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <Header />
         <div class="container-about">
             <h2 class="about-header">{{ $t("titleAbout") }}</h2>
 
@@ -140,7 +71,8 @@
             <p>
                 {{ $t("we7") }}
                 <b> {{ $t("linkB") }}</b> {{ $t("we8") }}
-                <b>{{ $t("posudaB") }}</b> {{ $t("we9") }}
+                <b>{{ $t("posudaB") }}</b>
+                {{ $t("we9") }}
                 <b>{{ $t("posudaB") }}</b>
                 {{ $t("we10") }}
             </p>
@@ -160,10 +92,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            // For style
+            navActive: true,
+            isNavbar: false
+        };
+    },
+    methods: {
+        navbarAdd() {
+            this.isNavbar = true;
+        },
+        navbarRemove() {
+            this.isNavbar = false;
+        }
+    }
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // Global styles
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 * {
@@ -177,6 +125,7 @@ li {
 a {
     text-decoration: none;
 }
+
 .about-header {
     font-size: 2rem;
     font-weight: 900;
@@ -268,7 +217,15 @@ a {
     }
 }
 // =========== Responsive style ===========
+@media screen and (max-width: 1025px) {
+    .container-about {
+        margin: 79px auto 0 auto;
+    }
+}
 @media screen and (max-width: 920px) {
+    .container-about {
+        margin: 79px auto 0 auto;
+    }
     // ========== Video and Info text ============
     .video-vs-info {
         display: flex;

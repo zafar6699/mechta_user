@@ -31,7 +31,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@assets/scss/style.scss",],
+  css: ["@assets/scss/style.scss", "@assets/scss/style.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -54,29 +54,17 @@ export default {
   modules: [
     "@nuxtjs/axios",
     "@nuxtjs/style-resources",
-    "@nuxtjs/vuetify",
-    ["@nuxtjs/vuetify", {}],
     'nuxt-i18n',
+    '@nuxtjs/google-fonts'
   ],
-// Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-// vuetify: {
-//   customVariables: ['~/assets/variables.scss'],
-//   theme: {
-//     dark: false,
-//     themes: {
-//       dark: {
-//         primary: colors.blue.darken2,
-//         accent: colors.grey.darken3,
-//         secondary: colors.amber.darken3,
-//         info: colors.teal.lighten1,
-//         warning: colors.amber.base,
-//         error: colors.deepOrange.accent4,
-//         success: colors.green.accent3
-//       }
-//     }
-//   }
-// },
-// ============ Language change ============
+  //  ======== Google fonts ===========
+  googleFonts: {
+    families: {
+      Roboto: [400, 500, 700, 900],
+      Lobster: [400]
+    }
+  },
+  // ============ Language change ============
   i18n: {
     locales: [
       {
@@ -92,13 +80,13 @@ export default {
     langDir: "lang/",
     defaultLocale: "ru"
   },
-  
+
   styleResources: {
     scss: ["@assets/scss/*.scss"]
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {  baseURL: 'http://mechta-posuda.uz:3000/api' },
+  axios: { baseURL: 'http://mechta-posuda.uz:3000/api' },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

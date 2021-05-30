@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <Header/>
-    <Nuxt />
-    <Footer />
-  </div>
+    <div>
+        <Nuxt />
+        <Footer />
+    </div>
 </template>
-
 
 <style></style>
