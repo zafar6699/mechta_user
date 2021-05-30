@@ -16,7 +16,10 @@
             src="@/assets/image/phone.svg"
             alt=""
           />
-          <p class="head-phone-number">+998 (99) 329-14-04</p>
+          <p class="head-phone-number">
+            <span>{{ $t("networkShop") }}</span>
+             <span>+998 (99) 329-14-04</span>
+             </p>
 
           <button @click="selectLan" class="select-language">
             <h6 v-if="$i18n.locale == 'uz'">uz</h6>
@@ -106,7 +109,10 @@
             src="@/assets/image/phone.svg"
             alt=""
           />
-          <p class="head-phone-number">+998 (99) 329-14-04</p>
+          <p class="head-phone-number">
+             <span>{{ $t("networkShop") }}</span>
+             <span>+998 (99) 329-14-04</span>
+             </p>
           <div class="header-bag-icon">
             <img src="@/assets/image/bag.svg" alt="" />
             <div class="header-count">
@@ -117,7 +123,7 @@
         <ul class="nav-link">
           <li @click="navbarRemove()">
             <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
-          </li>
+          </li> 
           <li @click="navbarRemove()">
             <nuxt-link to="/productAbout">{{ $t("lan2") }}</nuxt-link>
           </li>
@@ -125,7 +131,7 @@
             <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan4") }}</a>
+             <nuxt-link to="/zoom">{{ $t("lan4") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
             <a href="#">{{ $t("lan5") }}</a>
@@ -494,6 +500,9 @@ header {
     line-height: 21px;
     color: #ffffff;
     margin-right: 20px;
+    span{
+      display: block;
+    }
   }
   .header-bag-icon {
     position: relative;

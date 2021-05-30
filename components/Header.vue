@@ -16,7 +16,8 @@
             src="@/assets/image/phone.svg"
             alt=""
           />
-          <p class="head-phone-number">+998 (99) 329-14-04</p>
+          <p class="head-phone-number"> <span>{{ $t("networkShop") }}</span>
+             <span>+998 (99) 329-14-04</span></p>
           <button @click="selectLan" class="select-language">
             <h6 v-if="$i18n.locale == 'uz'">uz</h6>
             <h6 v-if="$i18n.locale == 'ru'">ру</h6>
@@ -104,7 +105,8 @@
             src="@/assets/image/phone.svg"
             alt=""
           />
-          <p class="head-phone-number">+998 (99) 329-14-04</p>
+          <p class="head-phone-number"> <span>{{ $t("networkShop") }}</span>
+             <span>+998 (99) 329-14-04</span></p>
           <div class="header-bag-icon">
             <img src="@/assets/image/bag.svg" alt="" />
             <div class="header-count">
@@ -123,7 +125,7 @@
             <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan4") }}</a>
+              <nuxt-link to="/zoom">{{ $t("lan4") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
             <a href="#">{{ $t("lan5") }}</a>

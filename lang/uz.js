@@ -3,6 +3,7 @@ export default {
     title1: "O'ZBEKISTONDAGI",
     title2: "RASMIY DISTRIBYUTOR",
     slogan: "Hammasi orzudan boshlanadi!",
+    networkShop: "Internet do'kon",
     
     // Navbar
     lan1: "Bosh sahifa",

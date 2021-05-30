@@ -9,102 +9,110 @@
         <!-- ==================== Order window ============================== -->
 
         <div :class="{ orderWindow: active, orderActive: orderIsActive }">
-            <div class="order-inner">
-                <div class="order-inner-in">
-                    <div class="order-header">
-                        <img src="@/assets/image/logo_green.svg" alt="" />
-                        <p>Xarid qilish</p>
-                    </div>
-                    <div class="order-inputs">
-                        <div class="form-input">
-                            <label for="#">F.I.O</label>
-                            <input
-                                type="text"
-                                placeholder="To'liq ismni kiriting"
-                                v-model="name"
-                            />
+            <div :class="{ orderInner: active }">
+                <div :class="{ orderSuccess: successOrder }">
+                    Zakaz junatildi
+                </div>
+                <div :class="{ orderInner: active, orderSend: orderInActive }">
+                    <div class="order-inner-in">
+                        <div class="order-header">
+                            <img src="@/assets/image/logo_green.svg" alt="" />
+                            <p>Xarid qilish</p>
                         </div>
-                        <div class="form-input form-number">
-                            <label for="#">Telefon raqam</label>
-                            <input
-                                type="number"
-                                placeholder="Telefon raqam"
-                                v-model="phone"
-                            />
-                            <span class="number">+998</span>
-                        </div>
+                        <div class="order-inputs">
+                            <div class="form-input">
+                                <label for="#">F.I.O</label>
+                                <input
+                                    type="text"
+                                    placeholder="To'liq ismni kiriting"
+                                    v-model="modelName"
+                                />
+                            </div>
+                            <div class="form-input form-number">
+                                <label for="#">Telefon raqam</label>
+                                <input
+                                    type="number"
+                                    placeholder="Telefon raqam"
+                                    v-model="modelPhone"
+                                />
+                                <span class="number">+998</span>
+                            </div>
 
-                        <div class="form-input">
-                            <label for="#">Viloyat</label>
+                            <div class="form-input">
+                                <label for="#">Viloyat</label>
 
-                            <div class="custom-select">
-                                <select class="select" v-model="region">
-                                    <option value="Toshkent shahar"
-                                        >Toshkent shahar</option
+                                <div class="custom-select">
+                                    <select
+                                        class="select"
+                                        v-model="modelRegion"
                                     >
-                                    <option value="Toshkent viloyati"
-                                        >Toshkent viloyati</option
-                                    >
-                                    <option value="Andijon viloyati"
-                                        >Andijon viloyati</option
-                                    >
-                                    <option value="Buxoro viloyati"
-                                        >Buxoro viloyati</option
-                                    >
-                                    <option value="Surxondaryo viloyati">
-                                        Surxondaryo viloyati
-                                    </option>
-                                    <option value="Qashqadaryo viloyati">
-                                        Qashqadaryo viloyati
-                                    </option>
-                                    <option value="Xorazm viloyati"
-                                        >Xorazm viloyati</option
-                                    >
-                                    <option value="Namangan viloyati"
-                                        >Namangan viloyati</option
-                                    >
-                                    <option value="Farg'ona viloyati"
-                                        >Farg'ona viloyati</option
-                                    >
-                                    <option value="Samarqand viloyati"
-                                        >Samarqand viloyati</option
-                                    >
-                                    <option value="Navoiy viloyati"
-                                        >Navoiy viloyati</option
-                                    >
-                                    <option value="Jizzax viloyati"
-                                        >Jizzax viloyati</option
-                                    >
-                                    <option value="Sirdaryo viloyati"
-                                        >Sirdaryo viloyati</option
-                                    >
-                                    <option value="Qoraqalpoq Respublikasi">
-                                        Qoraqalpoq Respublikasi
-                                    </option>
-                                </select>
-                                <span class="custom-arrow"></span>
+                                        <option value="Toshkent shahar"
+                                            >Toshkent shahar</option
+                                        >
+                                        <option value="Toshkent viloyati"
+                                            >Toshkent viloyati</option
+                                        >
+                                        <option value="Andijon viloyati"
+                                            >Andijon viloyati</option
+                                        >
+                                        <option value="Buxoro viloyati"
+                                            >Buxoro viloyati</option
+                                        >
+                                        <option value="Surxondaryo viloyati">
+                                            Surxondaryo viloyati
+                                        </option>
+                                        <option value="Qashqadaryo viloyati">
+                                            Qashqadaryo viloyati
+                                        </option>
+                                        <option value="Xorazm viloyati"
+                                            >Xorazm viloyati</option
+                                        >
+                                        <option value="Namangan viloyati"
+                                            >Namangan viloyati</option
+                                        >
+                                        <option value="Farg'ona viloyati"
+                                            >Farg'ona viloyati</option
+                                        >
+                                        <option value="Samarqand viloyati"
+                                            >Samarqand viloyati</option
+                                        >
+                                        <option value="Navoiy viloyati"
+                                            >Navoiy viloyati</option
+                                        >
+                                        <option value="Jizzax viloyati"
+                                            >Jizzax viloyati</option
+                                        >
+                                        <option value="Sirdaryo viloyati"
+                                            >Sirdaryo viloyati</option
+                                        >
+                                        <option value="Qoraqalpoq Respublikasi">
+                                            Qoraqalpoq Respublikasi
+                                        </option>
+                                    </select>
+                                    <span class="custom-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="#">Manzil</label>
+                                <input
+                                    type="text"
+                                    placeholder="Manzil"
+                                    v-model="modelAddress"
+                                />
                             </div>
                         </div>
-                        <div class="form-input">
-                            <label for="#">Manzil</label>
-                            <input
-                                type="text"
-                                placeholder="Manzil"
-                                v-model="address"
-                            />
+                        <div class="form-checkbox">
+                            <input type="checkbox" />
+                            <span>Men hamma shartlarga roziman</span>
                         </div>
+                        <button
+                            type="submit"
+                            class="order-button"
+                            @click="submit()"
+                        >
+                            Buyurtmani tekshirish
+                        </button>
                     </div>
-                    <div class="form-checkbox">
-                        <input type="checkbox" />
-                        <span>Men hamma shartlarga roziman</span>
-                    </div>
-                    <button
-                        type="submit"
-                        class="order-button"
-                        @click="submit()"
-                    >
-                        Buyurtmani tekshirish
-                    </button>
                 </div>
             </div>
         </div>
@@ -276,15 +284,29 @@ export default {
     data() {
         return {
             // order
-            region: "",
-            address: "",
-            phone: "",
-            name: "",
+            modelRegion: "",
+            modelAddress: "",
+            modelPhone: "",
+            modelName: "",
+            data: [
+                {
+                    region: "",
+                    address: "",
+                    phone: "",
+                    name: "",
+                    totalNum: 0,
+                    totalPrice: 0,
+                    products: "",
+                    status: true
+                }
+            ],
             // style
             active: true,
             rotateActive: 0,
             orderIsActive: false,
             isBody: true,
+            orderInActive: false,
+            successOrder: true,
             // api dan kelayotgan ma'lumotlar
             product: null,
             similarProduct: null,
@@ -320,8 +342,29 @@ export default {
     },
 
     methods: {
-        submit() {
-            console.log(this.region, this.address, this.phone, this.name);
+        async submit() {
+            this.data.region = this.modelRegion;
+            this.data.address = this.modelAddress;
+            this.data.phone = this.modelPhone;
+            this.data.name = this.modelName;
+            this.data.totalNum = this.sum;
+            this.data.totalPrice = this.price;
+            this.data.products = this.product;
+            console.log(this.data);
+            await this.$axios
+                .post("/orders", this.data)
+                .then(response => {
+                    console.log(response, this.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            this.modelRegion = "";
+            this.modelAddress = "";
+            this.modelPhone = "";
+            this.modelName = "";
+            this.orderInActive = true;
+            this.successOrder = false;
         },
         // OrderClick
         orderAdd() {
@@ -432,12 +475,19 @@ a {
     height: 75%;
     display: none;
 }
-.order-inner {
+.orderInner {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+.orderSuccess {
+    display: block;
+    display: none;
+}
+.orderSend {
+    display: none;
 }
 .order-inner-in {
     width: 95%;
