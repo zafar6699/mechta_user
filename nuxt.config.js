@@ -37,7 +37,6 @@ export default {
   plugins: [
     { src: "@/plugins/vue-slick-carousel.js" },
     { src: "@/plugins/validate.js" },
-
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

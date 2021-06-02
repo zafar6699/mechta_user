@@ -122,34 +122,34 @@
         </div>
         <ul class="nav-link">
           <li @click="navbarRemove()">
-            <nuxt-link to="/">{{ $t("lan1") }}</nuxt-link>
+            <nuxt-link to="/" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan1") }}</nuxt-link>
           </li> 
           <li @click="navbarRemove()">
-            <nuxt-link to="/productAbout">{{ $t("lan2") }}</nuxt-link>
+            <nuxt-link to="/productAbout" @click="linkActive()" :class="{navItem: lActive}"  >{{ $t("lan2") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-            <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
+            <nuxt-link to="/about" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan3") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-             <nuxt-link to="/zoom">{{ $t("lan4") }}</nuxt-link>
+             <nuxt-link to="/zoom" @click="linkActive()" :class="{navItem: lActive}" > {{ $t("lan4") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan5") }}</a>
+             <nuxt-link to="/zoomer" @click="linkActive()" :class="{navItem: lActive}" > {{ $t("lan5") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan6") }}</a>
+            <a href="#" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan6") }}</a>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan7") }}</a>
+            <a href="#" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan7") }}</a>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan8") }}</a>
+            <a href="#" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan8") }}</a>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan9") }}</a>
+            <a href="#" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan9") }}</a>
           </li>
           <li @click="navbarRemove()">
-            <a href="#">{{ $t("lan10") }}</a>
+            <a href="#" @click="linkActive()" :class="{navItem: lActive}"  >{{ $t("lan10") }}</a>
           </li>
         </ul>
       </div>
@@ -362,6 +362,7 @@ export default {
   data() {
     return {
       // For style
+      lActive: true,
       navActive: true,
       isNavbar: false,
       activeAll: false,
@@ -684,7 +685,9 @@ button.select-language {
     }
   }
 }
-
+.navItem {
+  color: #148e3c!important;
+}
 // ============= Home section Slider galery =================
 
 .slider {

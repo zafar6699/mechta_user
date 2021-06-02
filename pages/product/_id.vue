@@ -118,29 +118,43 @@
         </div>
 
         <!-- ==================== Order window end ========================== -->
+
+        <!-- =========================== Product info =============================== -->
         <section class="product-info">
             <!-- ========================= Products Image ============================ -->
             <div class="pro-img-price">
-                <div class="pro-img">
-                    <span class="pro-img-type">
-                        <span v-for="i of image" :key="i">
+                <div class="product-img">
+                    <ul ref="list" class="list">
+                        <li v-for="(image, i) in imgs" :key="i">
                             <img
+                                :class="i == index ? 'current' : ''"
+                                @click="imgClick(image.url, i)"
                                 :src="
-                                    `http://server.mechta-posuda.uz:3000/${i.url}`
+                                    `http://server.mechta-posuda.uz:3000/${image.url}`
                                 "
-                                v-on:click="changeImg(i.url)"
                             />
-                        </span>
-                    </span>
-
-                    <div>
+                        </li>
+                    </ul>
+                    <div class="pic">
                         <img
-                            v-if="mainImg != null"
-                            :src="
-                                `http://server.mechta-posuda.uz:3000/${mainImg}`
-                            "
-                            alt="qozon"
+                            ref="img"
+                            @mousemove="imgMove($event)"
+                            :src="`http://server.mechta-posuda.uz:3000/${img}`"
                         />
+                        <div ref="cover" class="cover"></div>
+                        <div
+                            ref="img"
+                            :style="{
+                                'background-position':
+                                    details.backgroundPosition,
+                                'background-image':
+                                    'url(' +
+                                    'http://server.mechta-posuda.uz:3000/' +
+                                    img +
+                                    ')'
+                            }"
+                            class="detail"
+                        ></div>
                     </div>
                 </div>
                 <!-- ========================= Products Price ================================= -->
@@ -283,6 +297,12 @@
 export default {
     data() {
         return {
+            index: 0,
+            img: "",
+            details: {
+                backroundImage: "",
+                backgroundPosition: ""
+            },
             // order
             modelRegion: "",
             modelAddress: "",
@@ -310,7 +330,7 @@ export default {
             // api dan kelayotgan ma'lumotlar
             product: null,
             similarProduct: null,
-            image: null,
+            imgs: {},
             mainImg: "",
             mainImg1: "",
             mainImg2: "",
@@ -389,26 +409,62 @@ export default {
         remove() {
             this.price = this.price - this.staticPrice;
             this.sum--;
+        },
+        // img lupa
+        imgClick(image, index) {
+            this.img = image;
+            this.index = index;
+        },
+        imgMove(e) {
+            var vm = this;
+            var x = e.clientX;
+            var y = e.clientY;
+            /* The distance between the picture frame and the browser */
+            var cx = vm.$refs.img.getBoundingClientRect().left;
+            var cy = vm.$refs.img.getBoundingClientRect().top;
+            var tx = x - cx - 3;
+            var ty = y - cy - 3;
+            if (tx < 0) {
+                tx = 0;
+            }
+            if (ty < 0) {
+                ty = 0;
+            }
+            /* Display picture width-width of shadow frame */
+            if (tx > 300) {
+                tx = 300;
+            }
+            /* Display picture height-shade frame height */
+            if (ty > 400) {
+                ty = 400;
+            }
+            vm.$refs.cover.style.left = tx + "px";
+            vm.$refs.cover.style.top = ty + "px";
+            /* According to the percentage of the moving distance of the shadow frame in the box ------ the percentage of the moving distance of the corresponding projection frame in the big picture */
+            /* tx,ty/The limit range of the shade frame */
+            vm.details.backgroundPosition =
+                (tx / 300) * 100 + "%" + (ty / 400) * 100 + "%";
         }
     },
     async mounted() {
+        console.log("res --- img", this.img);
         let response = await this.$axios.$get(
             `/product/` + this.$route.params.id
         );
         this.product = response.getProduct;
         this.similarProduct = response.similarProducts;
-        this.image = response.getProduct.images;
+        this.imgs = response.getProduct.images;
         this.price = response.getProduct.price;
         this.staticPrice = response.getProduct.price;
-        this.mainImg = this.image[0].url;
-        this.mainImg1 = this.image[0].url;
-        this.mainImg2 = this.image[1].url;
-        this.mainImg3 = this.image[2].url;
+        this.img = this.imgs[0].url;
+        // this.mainImg1 = this.image[0].url;
+        // this.mainImg2 = this.image[1].url;
+        // this.mainImg3 = this.image[2].url;
 
-        this.color[0].img = this.mainImg1;
-        this.color[1].img = this.mainImg2;
-        this.color[2].img = this.mainImg3;
-        // console.log("res images-->", this.image);
+        // this.color[0].img = this.mainImg1;
+        // this.color[1].img = this.mainImg2;
+        // this.color[2].img = this.mainImg3;
+        console.log("res images-->", this.imgs);
         // console.log("res similar-->", this.similarProduct);
 
         // ============ Tab content ================
@@ -435,7 +491,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
     margin: 0;
@@ -625,38 +681,68 @@ a {
     font-size: 20px;
     cursor: pointer;
 } // -------- order window end ------------
-// Product info img
+
+//===================== Product info img =======================
 .pro-img-price {
     display: flex;
 }
-.pro-img {
+.product-img {
     flex: 1 1 20rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    div {
+    .pic {
         width: 300px;
         height: 300px;
+        cursor: zoom-in;
+        position: relative;
+        .detail {
+            position: absolute;
+            top: 0;
+            left: 310px;
+            width: 400px;
+            height: 300px;
+            background-size: 900px 1100px;
+            display: none;
+            z-index: 3;
+        }
+        &:hover {
+            .detail {
+                display: block;
+            }
+        }
     }
+
     img {
         width: 100%;
         height: 100%;
     }
-    .pro-img-type {
+    .cover {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200px;
+        height: 200px;
+        opacity: 0.6;
+        display: none;
+    }
+    .list {
         position: absolute;
         top: 0;
         left: 5px;
-        span {
+        li {
             display: block;
             width: 56px;
             height: 56px;
             border: 1px solid #148e3c;
             margin: 3px;
         }
+        .current {
+            border: 3px solid #148e3c;
+        }
     }
 }
-
 // =============== Product info price ===================
 .pro-price {
     flex: 2 1 35rem;

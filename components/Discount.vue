@@ -181,7 +181,7 @@
                                     <div class="card-img">
                                         <div class="card-img-in">
                                             <img
-                                                src="@/assets/image/qozon.png"
+                                                src="https://images.pexels.com/photos/5926388/pexels-photo-5926388.jpeg?cs=srgb&dl=pexels-sora-shimazaki-5926388.jpg&fm=jpg"
                                             />
                                         </div>
                                     </div>
