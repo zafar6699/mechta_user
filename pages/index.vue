@@ -294,7 +294,7 @@
                     </div>
                 </div>
             </section>
-        </main>
+        </main> 
 
     <!-- ==================== Discount section ================= -->
     <Discount />

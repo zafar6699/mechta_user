@@ -32,6 +32,7 @@ export default {
             index: 0,
             img: "",
             imgs: [
+                "http://server.mechta-posuda.uz:3000/uploads/products/1619784157355-Сков. брил серый нес 1 .jpg",
                 "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg",
                 "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gardenia-royalty-free-image-1580854928.jpg",
                 "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gardenia-royalty-free-image-1580854928.jpg",
@@ -105,16 +106,16 @@ ul {
     justify-content: center;
     position: relative;
     .pic {
-        width: 300px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
         cursor: zoom-in;
         position: relative;
         .detail {
             position: absolute;
             top: 0;
-            left: 310px;
+            left: 410px;
             width: 400px;
-            height: 300px;
+            height: 400px;
             background-size: 900px 1100px;
             display: none;
             z-index: 3;

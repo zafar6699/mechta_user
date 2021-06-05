@@ -143,15 +143,10 @@
                         />
                         <div ref="cover" class="cover"></div>
                         <div
-                            ref="img"
                             :style="{
                                 'background-position':
                                     details.backgroundPosition,
-                                'background-image':
-                                    'url(' +
-                                    'http://server.mechta-posuda.uz:3000/' +
-                                    img +
-                                    ')'
+                                'background-image': `url('http://server.mechta-posuda.uz:3000/${img}')`
                             }"
                             class="detail"
                         ></div>
@@ -331,7 +326,6 @@ export default {
             product: null,
             similarProduct: null,
             imgs: {},
-            mainImg: "",
             mainImg1: "",
             mainImg2: "",
             mainImg3: "",
@@ -393,12 +387,9 @@ export default {
         orderRemove() {
             this.orderIsActive = false;
         },
-        // change img
-        changeImg(url) {
-            this.mainImg = url;
-        },
+        // change color
         changeColor(url, rotate) {
-            this.mainImg = url;
+            this.img = url;
             this.rotateActive = rotate;
         },
         // calculation product
@@ -447,7 +438,6 @@ export default {
         }
     },
     async mounted() {
-        console.log("res --- img", this.img);
         let response = await this.$axios.$get(
             `/product/` + this.$route.params.id
         );
@@ -457,15 +447,13 @@ export default {
         this.price = response.getProduct.price;
         this.staticPrice = response.getProduct.price;
         this.img = this.imgs[0].url;
-        // this.mainImg1 = this.image[0].url;
-        // this.mainImg2 = this.image[1].url;
-        // this.mainImg3 = this.image[2].url;
+        this.mainImg1 = this.imgs[0].url;
+        this.mainImg2 = this.imgs[1].url;
+        this.mainImg3 = this.imgs[2].url;
 
-        // this.color[0].img = this.mainImg1;
-        // this.color[1].img = this.mainImg2;
-        // this.color[2].img = this.mainImg3;
-        console.log("res images-->", this.imgs);
-        // console.log("res similar-->", this.similarProduct);
+        this.color[0].img = this.mainImg1;
+        this.color[1].img = this.mainImg2;
+        this.color[2].img = this.mainImg3;
 
         // ============ Tab content ================
 
@@ -681,28 +669,30 @@ a {
     font-size: 20px;
     cursor: pointer;
 } // -------- order window end ------------
-
+// ==================== Product info section ===================
+.product-info {
+    margin-bottom: 15px;
+}
 //===================== Product info img =======================
 .pro-img-price {
     display: flex;
 }
 .product-img {
-    flex: 1 1 20rem;
+    flex: 1 1 25rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
     .pic {
-        width: 300px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
         cursor: zoom-in;
+        margin-left: 88px;
         position: relative;
         .detail {
             position: absolute;
             top: 0;
-            left: 310px;
+            left: 444px;
             width: 400px;
-            height: 300px;
+            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+            height: 400px;
             background-size: 900px 1100px;
             display: none;
             z-index: 3;
@@ -728,15 +718,15 @@ a {
         display: none;
     }
     .list {
+        margin: 0 10px;
         position: absolute;
-        top: 0;
-        left: 5px;
+        z-index: 3;
         li {
             display: block;
             width: 56px;
             height: 56px;
             border: 1px solid #148e3c;
-            margin: 3px;
+            margin: 5px 0;
         }
         .current {
             border: 3px solid #148e3c;
@@ -745,7 +735,7 @@ a {
 }
 // =============== Product info price ===================
 .pro-price {
-    flex: 2 1 35rem;
+    flex: 2 1 30rem;
 }
 .pro-price {
     display: flex;
@@ -1048,9 +1038,6 @@ main {
 */
 
 @media (min-width: 1281px) {
-    //  .container-pro{
-
-    //  }
 }
 
 /*
@@ -1075,7 +1062,7 @@ main {
     ##Screen = B/w 768px to 1024px
   */
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 807px) and (max-width: 1024px) {
     .body {
         margin-top: 90px;
     }
@@ -1140,15 +1127,22 @@ main {
         transform: translateX(-100%);
     }
     // Product image price
-    .pro-img div {
-        width: 250px;
-        height: 250px;
+    .product-img {
+        .pic {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+            .detail {
+                left: 371px;
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
-
     .pro-price {
         flex: 1 1 20rem;
     }
-
     .buy-btn {
         button:nth-child(1) {
             width: 112px;
@@ -1179,7 +1173,7 @@ main {
     }
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 806px) {
     .body {
         margin-top: 90px;
     }
@@ -1244,19 +1238,29 @@ main {
         transform: translateX(-100%);
     }
     // Product image price
-    .pro-img-type {
-        left: 27px;
-    }
+
     .pro-img-price {
         flex-direction: column;
+        justify-content: center;
     }
-    .pro-img div {
-        width: 300px;
-        height: 300px;
+    .product-img {
+        flex: 1 1 20rem;
+        .pic {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+            .detail {
+                top: unset;
+                left: unset;
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 
     .pro-price {
         flex: 1 1 20rem;
+        margin-left: 56px;
         .price-info {
             padding: 0 30px;
         }
@@ -1312,141 +1316,41 @@ main {
     ##Device = Most of the Smartphones Mobiles (Portrait)
     ##Screen = B/w 320px to 479px
   */
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 350px) and (max-width: 480px) {
     .body {
         margin-top: 90px;
     }
-    .contact-language {
-        margin-right: 66px;
-        .header-phone-icon {
-            width: 12px;
-            margin-right: 10px;
-        }
-        .head-phone-number {
-            font-size: 12px;
-            margin-right: 10px;
-        }
-        select {
-            font-size: 12px;
-            margin-right: 10px;
-        }
-        .header-bag-icon {
-            img {
-                width: 27px;
-            }
-        }
-    }
-    .mobile-select {
-        display: block !important;
-        position: absolute;
-        top: 37%;
-        right: 15%;
-        z-index: 1;
-        border: none;
-        outline: none;
-        background: transparent;
-        font-family: "Roboto Bold", sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 21px;
-        color: #ffffff;
-        padding: 0 8px;
-        option {
-            color: #ffffff;
-            background-color: #148e3c;
-            border: none;
-            outline: none;
-        }
-    }
-    .burger {
-        display: block;
-        position: absolute;
-        top: 37%;
-        right: 5%;
-        z-index: 4;
-    }
-    .burger span {
-        padding: 1.5px 13px;
-        background: #fff;
-        margin: 3px 0px;
-        border-radius: 5px;
-        display: block;
-        transition: all 0.5s ease;
-    }
-    .navbar {
-        background: #148e3c !important;
-        position: fixed;
-        top: 0;
-        left: 100%;
-        width: 100%;
-        height: 100vh;
-        transition: transform 1s ease;
-        z-index: 3;
-    }
-    .navbar-inner {
-        padding: 20px;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-between;
 
-        .office-shop {
-            display: block !important;
-            p {
-                line-height: 22px;
-            }
-        }
-        .contact-language {
-            display: flex !important;
-        }
-    }
-    // .category-select {
-    //     color: #fff;
-    // }
-    .nav-link {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-
-        li {
-            width: 100%;
-            height: 30px;
-            border-bottom: 1px solid #077507;
-            cursor: pointer;
-            a {
-                color: white !important;
-                font-size: 18px;
-            }
-        }
-        li:nth-child(1) a {
-            color: #e7ea09;
-        }
-    }
-
-    .nav-link a {
-        color: white !important;
-        font-size: 18px;
-    }
-    .nav-open {
-        transform: translateX(-100%);
-    }
     // Product image price
-    .pro-img-type {
-        left: 27px;
-    }
     .pro-img-price {
         flex-direction: column;
     }
-    .pro-img div {
-        width: 215px;
-        height: 215px;
+    .product-img {
+        flex: 1 1 16rem;
+        .list {
+            li {
+                width: 45px;
+                height: 45px;
+            }
+            li:nth-child(1) {
+                margin-top: 0;
+            }
+        }
+        .pic {
+            width: 250px;
+            height: 233px;
+            margin: 0 auto;
+            .detail {
+                top: unset;
+                left: unset;
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
-
     .pro-price {
         flex: 1 1 20rem;
+        margin-left: 56px;
         .price-info {
             padding: 0 30px;
         }
@@ -1454,13 +1358,17 @@ main {
             padding: 0 30px;
         }
         .buy-btn {
+            display: flex;
             button:nth-child(1) {
-                width: 112px;
+                width: 97px;
                 height: 36px;
+                margin-bottom: 5px;
+                font-size: 13px;
             }
             button:nth-child(2) {
-                width: 189px;
+                width: 169px;
                 height: 36px;
+                font-size: 13px;
             }
         }
     }

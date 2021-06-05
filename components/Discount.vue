@@ -5,7 +5,11 @@
                 <div class="discount-inner">
                     <div class="discount-slider">
                         <Carousel v-bind="settings">
-                            <div class="card-slider">
+                            <div
+                                class="card-slider"
+                                v-for="(item, index) in sliderProduct"
+                                :key="index"
+                            >
                                 <div class="product-card">
                                     <div class="xit-circle">
                                         <span class="xit">ХИТ</span>
@@ -14,174 +18,6 @@
                                         <div class="card-img-in">
                                             <img
                                                 src="@/assets/image/qozon.png"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
-                                        </p>
-                                        <span>Серия Гранит</span>
-                                        <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
-                                            <button type="button">
-                                                В Корзину
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-slider">
-                                <div class="product-card">
-                                    <div class="xit-circle">
-                                        <span class="xit">ХИТ</span>
-                                    </div>
-                                    <div class="card-img">
-                                        <div class="card-img-in">
-                                            <img
-                                                src="@/assets/image/qozon.png"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
-                                        </p>
-                                        <span>Серия Гранит</span>
-                                        <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
-                                            <button type="button">
-                                                В Корзину
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-slider">
-                                <div class="product-card">
-                                    <div class="xit-circle">
-                                        <span class="xit">ХИТ</span>
-                                    </div>
-                                    <div class="card-img">
-                                        <div class="card-img-in">
-                                            <img
-                                                src="@/assets/image/qozon.png"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
-                                        </p>
-                                        <span>Серия Гранит</span>
-                                        <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
-                                            <button type="button">
-                                                В Корзину
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-slider">
-                                <div class="product-card">
-                                    <div class="xit-circle">
-                                        <span class="xit">ХИТ</span>
-                                    </div>
-                                    <div class="card-img">
-                                        <div class="card-img-in">
-                                            <img
-                                                src="@/assets/image/qozon.png"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
-                                        </p>
-                                        <span>Серия Гранит</span>
-                                        <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
-                                            <button type="button">
-                                                В Корзину
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-slider">
-                                <div class="product-card">
-                                    <div class="xit-circle">
-                                        <span class="xit">ХИТ</span>
-                                    </div>
-                                    <div class="card-img">
-                                        <div class="card-img-in">
-                                            <img
-                                                src="@/assets/image/qozon.png"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
-                                        </p>
-                                        <span>Серия Гранит</span>
-                                        <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
-                                            <button type="button">
-                                                В Корзину
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-slider">
-                                <div class="product-card">
-                                    <div class="xit-circle">
-                                        <span class="xit">ХИТ</span>
-                                    </div>
-                                    <div class="card-img">
-                                        <div class="card-img-in">
-                                            <img
-                                                src="@/assets/image/qozon.png"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
-                                        </p>
-                                        <span>Серия Гранит</span>
-                                        <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
-                                            <button type="button">
-                                                В Корзину
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-slider">
-                                <div class="product-card">
-                                    <div class="xit-circle">
-                                        <span class="xit">ХИТ</span>
-                                    </div>
-                                    <div class="card-img">
-                                        <div class="card-img-in">
-                                            <img
-                                                src="https://images.pexels.com/photos/5926388/pexels-photo-5926388.jpeg?cs=srgb&dl=pexels-sora-shimazaki-5926388.jpg&fm=jpg"
                                             />
                                         </div>
                                     </div>
@@ -231,6 +67,9 @@
 export default {
     data() {
         return {
+            // data from server
+            sliderProduct: [1, 4, 6, 7, 5, 4, 43],
+            // slider
             settings: {
                 dots: true,
                 infinite: true,
@@ -279,6 +118,12 @@ export default {
                 ]
             }
         };
+    },
+    async mounted() {
+        let respon = await this.$axios.$get(
+            "http://mechta-posuda.uz:3000/api/product"
+        );
+        console.log("discount slider", respon);
     }
 };
 </script>

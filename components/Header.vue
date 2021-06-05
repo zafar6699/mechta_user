@@ -97,7 +97,7 @@
                         >
                           <a href="#2" class="link" @click="navbarRemove()">{{ k.nameUz }}</a>
                          </li>
-                    </ul>
+                    </ul> 
                 </p>
         <div class="contact-language">
           <img
