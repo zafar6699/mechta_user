@@ -17,7 +17,7 @@
             alt=""
           />
           <p class="head-phone-number">
-            <span>{{ $t("networkShop") }}</span>
+            <span class="tx-shop-net">{{ $t("networkShop") }}</span>
              <span>+998 (99) 329-14-04</span>
              </p>
 
@@ -131,10 +131,10 @@
             <nuxt-link to="/about" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan3") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-             <nuxt-link to="/zoom" @click="linkActive()" :class="{navItem: lActive}" > {{ $t("lan4") }}</nuxt-link>
+             <nuxt-link to="/" @click="linkActive()" :class="{navItem: lActive}" > {{ $t("lan4") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-             <nuxt-link to="/zoomer" @click="linkActive()" :class="{navItem: lActive}" > {{ $t("lan5") }}</nuxt-link>
+             <nuxt-link to="/" @click="linkActive()" :class="{navItem: lActive}" > {{ $t("lan5") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
             <a href="#" @click="linkActive()" :class="{navItem: lActive}" >{{ $t("lan6") }}</a>
@@ -186,7 +186,7 @@
             <p>{{ $t("title") }}</p>
             <a href="/about" class="home-button"><span>{{ $t("lan13") }}</span></a>
           </div>
-          <img src="@/assets/image/sasa.svg" alt="" />
+          <img src="@/assets/image/homeSlider2.jpeg" alt="" />
         </div>
 
         <div class="slide">
@@ -199,7 +199,7 @@
             <p>{{ $t("title") }}</p>
             <a href="/about" class="home-button"><span>{{ $t("lan13") }}</span></a>
           </div>
-          <img src="@/assets/image/sasa.svg" alt="" />
+          <img src="@/assets/image/homeSlider1.jpeg" alt="" />
         </div>
 
         <div class="slide">
@@ -212,7 +212,7 @@
             <p>{{ $t("title") }}</p>
             <a href="/about" class="home-button"><span>{{ $t("lan13") }}</span></a>
           </div>
-          <img src="@/assets/image/sasa.svg" alt="" />
+         <img src="@/assets/image/homeSlider3.png" alt="" />
         </div>
       </div>
 
@@ -430,7 +430,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped->
+<style lang="scss" scoped>
 // =================== Fonts styles ====================
 
 * {
@@ -464,7 +464,10 @@ header {
   // border: 1px solid;
 }
 .logo {
-  height: 60px;
+  height: 72px;
+ img{
+   width: 135%;
+ }
 }
 .office-shop {
   // border: 1px solid;
@@ -529,6 +532,9 @@ header {
       }
     }
   }
+}
+.tx-shop-net{
+  font-size: 19.5px;
 }
 .burger {
   display: none;
@@ -804,7 +810,7 @@ svg {
 
 // center
 main {
-  width: 90%;
+  width: 98%;
   margin: 0 auto;
 }
 
@@ -831,11 +837,12 @@ main {
 }
 
 .product-card {
-  flex: 1 1 15rem;
+  flex: 1 1 12rem;
   background-color: #ffffff;
-  margin: 12px;
+  margin: 6px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   position: relative;
+  transition: all 0.3s ease;
   .card-img {
     .card-img-in {
       width: 199px;
@@ -847,6 +854,9 @@ main {
       }
     }
   }
+  &:hover{
+     transform: translateY(-8px);
+  }
 }
 
 .card-text {
@@ -857,7 +867,7 @@ main {
     font-weight: bold;
     font-size: 16px;
     line-height: 19px;
-    height: 58px;
+    height: 70px;
     color: #323232;
     margin-bottom: 9px;
   }
@@ -881,7 +891,7 @@ main {
     font-family: "Roboto Bold", sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 21px;
     color: #148e3c;
   }
@@ -893,6 +903,12 @@ main {
     width: 99px;
     height: 32px;
     border-radius: 2px;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+    &:hover{
+      background-color: #148e3c;
+      color: #fff;
+    }
   }
 }
 
@@ -1138,12 +1154,6 @@ main {
   .header-nav {
     width: 95%;
   }
-  .logo {
-    height: 48px;
-    img {
-      width: 150px;
-    }
-  }
   .office-shop {
     p {
       font-size: 16px;
@@ -1229,12 +1239,6 @@ main {
   .header-nav {
     width: 95%;
   }
-  .logo {
-    height: 48px;
-    img {
-      width: 150px;
-    }
-  }
   .office-shop {
     margin-bottom: 15px;
     p {
@@ -1336,7 +1340,7 @@ main {
       border-bottom: 1px solid #077507;
       cursor: pointer;
       a {
-        color: white;
+        color: white!important;
         font-size: 18px;
       }
     }
@@ -1352,18 +1356,7 @@ main {
   .navOpen {
     transform: translateX(-100%);
   }
-  .toggle .line1 {
-    transform: rotateZ(45deg) translateY(300%);
-    background: #ffffff;
-  }
-  .toggle .line2 {
-    opacity: 0;
-  }
-  .toggle .line3 {
-    transform: rotateZ(-45deg) translateY(-300%);
-    background: #ffffff;
-  }
-
+  
   //================== Navbar Section ==============
   .nav-link li {
     font-size: 14px;
@@ -1443,10 +1436,10 @@ main {
   .header-nav {
     width: 95%;
   }
-  .logo {
-    height: 48px;
-    img {
-      width: 137px;
+  .logo{
+    height: 55px;
+    img{
+      width: 111%;
     }
   }
   .office-shop {
@@ -1461,7 +1454,7 @@ main {
   }
 
   .contact-language {
-    margin-right: 66px;
+    margin-right: 54px;
     .header-phone-icon {
       width: 12px;
       margin-right: 10px;
@@ -1480,7 +1473,9 @@ main {
       }
     }
   }
-
+button.select-language{
+  font-size: 21px;
+}
   .burger {
     display: block;
     position: absolute;
@@ -1556,7 +1551,7 @@ main {
       border-bottom: 1px solid #077507;
       cursor: pointer;
       a {
-        color: white;
+        color: white!important;
         font-size: 18px;
       }
     }
@@ -1572,17 +1567,7 @@ main {
   .navOpen {
     transform: translateX(-100%);
   }
-  .toggle .line1 {
-    transform: rotateZ(45deg) translateY(300%);
-    background: #ffffff;
-  }
-  .toggle .line2 {
-    opacity: 0;
-  }
-  .toggle .line3 {
-    transform: rotateZ(-45deg) translateY(-300%);
-    background: #ffffff;
-  }
+  
 
   //================== Navbar Section ==============
   .nav-link li {
@@ -1704,9 +1689,9 @@ main {
     width: 95%;
   }
   .logo {
-    height: 48px;
+    height: 55px;
     img {
-      width: 137px;
+      width: 107%;
     }
   }
   .office-shop {
@@ -1816,7 +1801,7 @@ main {
       border-bottom: 1px solid #077507;
       cursor: pointer;
       a {
-        color: white;
+        color: white!important;
         font-size: 18px;
       }
     }

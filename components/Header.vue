@@ -16,7 +16,7 @@
             src="@/assets/image/phone.svg"
             alt=""
           />
-          <p class="head-phone-number"> <span>{{ $t("networkShop") }}</span>
+          <p class="head-phone-number"> <span class="tx-shop-net">{{ $t("networkShop") }}</span>
              <span>+998 (99) 329-14-04</span></p>
           <button @click="selectLan" class="select-language">
             <h6 v-if="$i18n.locale == 'uz'">uz</h6>
@@ -125,7 +125,7 @@
             <nuxt-link to="/about">{{ $t("lan3") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
-              <nuxt-link to="/zoom">{{ $t("lan4") }}</nuxt-link>
+              <nuxt-link to="/">{{ $t("lan4") }}</nuxt-link>
           </li>
           <li @click="navbarRemove()">
             <a href="#">{{ $t("lan5") }}</a>
@@ -178,25 +178,9 @@ export default {
   },
   async mounted() {
     let categor = await this.$axios.$get(
-      "http://mechta-posuda.uz:3000/api/category"
+      "http://mechta-posuda.uz:3000/api/category" 
     );
     this.categorH = categor;
-
-    // const nav = document.querySelector(".navbar");
-    // const burger = document.querySelector(".burger");
-    // const links = nav.querySelectorAll("a");
-
-    // burger.addEventListener("click", () => {
-    //   nav.classList.toggle("nav-open");
-    //   burger.classList.toggle("toggle");
-    // });
-
-    // links.forEach((link) => {
-    //   link.addEventListener("click", () => {
-    //     nav.classList.toggle("nav-open");
-    //     burger.classList.toggle("toggle");
-    //   });
-    // });
   },
 };
 </script>
@@ -223,7 +207,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 3;
+  z-index: 6;
 }
 .header-nav {
   width: 90%;
@@ -235,7 +219,10 @@ header {
   // border: 1px solid;
 }
 .logo {
-  height: 60px;
+  height: 72px;
+ img{
+   width: 135%;
+ }
 }
 .office-shop {
   // border: 1px solid;
@@ -265,13 +252,16 @@ header {
     margin-right: 20px;
   }
   .head-phone-number {
-    font-family: "Roboto Bold", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
     color: #ffffff;
     margin-right: 20px;
+    span{
+      display: block;
+    }
   }
   .header-bag-icon {
     position: relative;
@@ -297,6 +287,9 @@ header {
       }
     }
   }
+}
+.tx-shop-net{
+  font-size: 19.5px;
 }
 .burger {
   display: none;
@@ -476,12 +469,6 @@ button.select-language {
   .header-nav {
     width: 95%;
   }
-  .logo {
-    height: 48px;
-    img {
-      width: 150px;
-    }
-  }
   .office-shop {
     p {
       font-size: 16px;
@@ -532,12 +519,6 @@ button.select-language {
   }
   .header-nav {
     width: 95%;
-  }
-  .logo {
-    height: 48px;
-    img {
-      width: 150px;
-    }
   }
   .office-shop {
     margin-bottom: 15px;
@@ -591,7 +572,7 @@ button.select-language {
     width: 100%;
     height: 100vh;
     transition: transform 1s ease;
-    z-index: 5;
+    z-index: 7;
     margin-top: 0px;
   }
   .navbar-inner {
@@ -688,10 +669,10 @@ button.select-language {
   .header-nav {
     width: 95%;
   }
-  .logo {
-    height: 48px;
-    img {
-      width: 137px;
+  .logo{
+    height: 55px;
+    img{
+      width: 111%;
     }
   }
   .office-shop {
@@ -706,7 +687,7 @@ button.select-language {
   }
 
   .contact-language {
-    margin-right: 66px;
+    margin-right: 54px;
     .header-phone-icon {
       width: 12px;
       margin-right: 10px;
@@ -725,7 +706,9 @@ button.select-language {
       }
     }
   }
-
+button.select-language{
+  font-size: 21px;
+}
   .burger {
     display: block;
     position: absolute;
@@ -749,7 +732,7 @@ button.select-language {
     width: 100%;
     height: 100vh;
     transition: transform 1s ease;
-    z-index: 5;
+    z-index: 7;
     margin-top: 0px;
   }
   .x-icon {
@@ -863,9 +846,9 @@ button.select-language {
     width: 95%;
   }
   .logo {
-    height: 48px;
+    height: 55px;
     img {
-      width: 137px;
+      width: 107%;
     }
   }
   .office-shop {
@@ -916,14 +899,14 @@ button.select-language {
     transition: all 0.5s ease;
   }
   .navbar {
-    background: #148e3c;
+    background: #6e7470;
     position: fixed;
     top: 0;
     left: 100%;
     width: 100%;
     height: 100vh;
     transition: transform 1s ease;
-    z-index: 5;
+    z-index: 7;
     margin-top: 0px;
   }
   .navbar-inner {

@@ -5,7 +5,13 @@
         <div
             :class="{ fullCover: active, orderActive: orderIsActive }"
             @click="orderRemove()"
-        ></div>
+        >
+        <div class="x-icon-black"   @click="orderRemove()">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+
+         </div>
+        </div>
         <!-- ==================== Order window ============================== -->
 
         <div :class="{ orderWindow: active, orderActive: orderIsActive }">
@@ -25,17 +31,29 @@
                                 <input
                                     type="text"
                                     placeholder="To'liq ismni kiriting"
-                                    v-model="modelName"
+                                    v-model="form.name"
+                                    autofocus=""
                                 />
+                                <div class="form-error">
+                                <span v-if="!$v.form.name.required && $v.form.name.$dirty" class="is-danger">Ism kirgizilmagan</span>
+                                </div>
                             </div>
                             <div class="form-input form-number">
                                 <label for="#">Telefon raqam</label>
+                                 <div class="form-num-in">
+                                      <span class="number">+998</span>
                                 <input
                                     type="number"
                                     placeholder="Telefon raqam"
-                                    v-model="modelPhone"
+                                    v-model="form.phone"
+                                    autofocus=""
                                 />
-                                <span class="number">+998</span>
+                                 </div>
+                                 <div class="form-error">
+                                <span v-if="!$v.form.phone.required && $v.form.phone.$dirty" class="is-danger">Telefon raqam kirgizilmagan</span>
+                                 <div class="is-danger" v-if="!$v.form.phone.minLength">Telefon raqam to'liq emas.</div>
+                                </div>
+    
                             </div>
 
                             <div class="form-input">
@@ -44,7 +62,8 @@
                                 <div class="custom-select">
                                     <select
                                         class="select"
-                                        v-model="modelRegion"
+                                        v-model="form.region"
+                                        autofocus=""
                                     >
                                         <option value="Toshkent shahar"
                                             >Toshkent shahar</option
@@ -91,14 +110,21 @@
                                     </select>
                                     <span class="custom-arrow"></span>
                                 </div>
+                                <div class="form-error">
+                                  <span v-if="!$v.form.region.required && $v.form.region.$dirty" class="is-danger">Viloyat yozilmagan</span>
+                                </div>
                             </div>
                             <div class="form-input">
                                 <label for="#">Manzil</label>
                                 <input
                                     type="text"
                                     placeholder="Manzil"
-                                    v-model="modelAddress"
+                                    v-model="form.address"
+                                    autofocus=""
                                 />
+                                <div class="form-error">
+                                    <span v-if="!$v.form.address.required && $v.form.address.$dirty" class="is-danger">Manzil kirgizilmagan</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-checkbox">
@@ -108,7 +134,7 @@
                         <button
                             type="submit"
                             class="order-button"
-                            @click="submit()"
+                            @click.prevent="submit"
                         >
                             Buyurtmani tekshirish
                         </button>
@@ -124,11 +150,23 @@
             <!-- ========================= Products Image ============================ -->
             <div class="pro-img-price">
                 <div class="product-img">
-                    <ul ref="list" class="list">
+                    <ul class="list">
                         <li v-for="(image, i) in imgs" :key="i">
                             <img
                                 :class="i == index ? 'current' : ''"
                                 @click="imgClick(image.url, i)"
+                                :src="
+                                    `http://server.mechta-posuda.uz:3000/${image.url}`
+                                "
+                            />
+                        </li>
+                    </ul>
+                    <!-- list mobil left -->
+                    <ul class="list-mobil-left">
+                        <li v-for="(image, i) in mobilImgs1" :key="i">
+                            <img
+                                :class="i == indexleft ? 'current-left' : ''"
+                                @click="imgClickLeft(image.url, i)"
                                 :src="
                                     `http://server.mechta-posuda.uz:3000/${image.url}`
                                 "
@@ -150,7 +188,19 @@
                             }"
                             class="detail"
                         ></div>
+                        <!-- <div class="cursor"></div> -->
                     </div>
+                    <ul class="list-mobil-right">
+                        <li v-for="(image, i) in mobilImgs2" :key="i">
+                            <img
+                                :class="i == index ? 'current-right' : ''"
+                                @click="imgClick(image.url, i)"
+                                :src="
+                                    `http://server.mechta-posuda.uz:3000/${image.url}`
+                                "
+                            />
+                        </li>
+                    </ul>
                 </div>
                 <!-- ========================= Products Price ================================= -->
                 <div class="pro-price">
@@ -289,20 +339,24 @@
     </div>
 </template>
 <script>
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
     data() {
         return {
             index: 0,
+            indexleft: 0,
             img: "",
             details: {
                 backroundImage: "",
                 backgroundPosition: ""
             },
             // order
-            modelRegion: "",
-            modelAddress: "",
-            modelPhone: "",
-            modelName: "",
+            form: {
+                name: '',
+                phone: '',
+                region: '',
+                address: ''
+            },
             data: [
                 {
                     region: "",
@@ -315,7 +369,7 @@ export default {
                     status: true
                 }
             ],
-            // style
+            // style +998946589699 Ilhom aka Programmer
             active: true,
             rotateActive: 0,
             orderIsActive: false,
@@ -326,6 +380,8 @@ export default {
             product: null,
             similarProduct: null,
             imgs: {},
+            mobilImgs1: {},
+            mobilImgs2: {},
             mainImg1: "",
             mainImg2: "",
             mainImg3: "",
@@ -354,17 +410,34 @@ export default {
             ]
         };
     },
-
+    validations: {
+    form: {
+        name: {
+           required
+        },
+        phone: {
+           required,
+           minLength: minLength(9)
+        },
+        region: {
+           required
+        },
+        address: {
+           required
+        },
+    }
+  },
     methods: {
         async submit() {
-            this.data.region = this.modelRegion;
-            this.data.address = this.modelAddress;
-            this.data.phone = this.modelPhone;
-            this.data.name = this.modelName;
+            this.$v.$touch();
+            if (!this.$v.$invalid){
+            this.data.region = this.form.region;
+            this.data.address = this.form.address;
+            this.data.phone = this.form.phone;
+            this.data.name = this.form.name;
             this.data.totalNum = this.sum;
             this.data.totalPrice = this.price;
             this.data.products = this.product;
-            console.log(this.data);
             await this.$axios
                 .post("/orders", this.data)
                 .then(response => {
@@ -373,19 +446,25 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-            this.modelRegion = "";
-            this.modelAddress = "";
-            this.modelPhone = "";
-            this.modelName = "";
-            this.orderInActive = true;
-            this.successOrder = false;
+             this.orderInActive = true;
+             this.successOrder = false;
+            }
+              console.log("form", this.data);
         },
         // OrderClick
         orderAdd() {
             this.orderIsActive = true;
         },
         orderRemove() {
-            this.orderIsActive = false;
+             this.orderIsActive = false;
+
+             this.form.name = "";
+             this.form.phone = "";
+             this.form.region = "";
+             this.form.address = "";
+             //this.orderInActive = true;
+             this.successOrder = true;
+             this.orderInActive = false;
         },
         // change color
         changeColor(url, rotate) {
@@ -406,10 +485,15 @@ export default {
             this.img = image;
             this.index = index;
         },
+        imgClickLeft(image, index) {
+            this.img = image;
+            this.indexleft = index;
+        },
         imgMove(e) {
             var vm = this;
             var x = e.clientX;
             var y = e.clientY;
+            console.log(x,y);
             /* The distance between the picture frame and the browser */
             var cx = vm.$refs.img.getBoundingClientRect().left;
             var cy = vm.$refs.img.getBoundingClientRect().top;
@@ -438,12 +522,18 @@ export default {
         }
     },
     async mounted() {
+
+        
         let response = await this.$axios.$get(
             `/product/` + this.$route.params.id
         );
         this.product = response.getProduct;
         this.similarProduct = response.similarProducts;
         this.imgs = response.getProduct.images;
+        this.mobilImgs1 = this.imgs.slice(0, 5);
+        this.mobilImgs2 = this.imgs.slice(5, this.imgs.length);
+        console.log("images Imgs--->>", this.mobilImgs1);
+        console.log("images Imgs2--->>", this.mobilImgs2);
         this.price = response.getProduct.price;
         this.staticPrice = response.getProduct.price;
         this.img = this.imgs[0].url;
@@ -475,6 +565,12 @@ export default {
             noteContent.classList.remove("content-none");
             characterContent.classList.add("content-none");
         });
+
+    //      const cursor = document.querySelector('.cursor');
+    //      const pic = document.querySelector('.pic');
+    //   cursor.addEventListener('mousemove', e => {
+    //       cursor.setAttribute("style", "top: "+e.pageY+"px; left: "+e.pageX+"px;")
+    //   })
     }
 };
 </script>
@@ -500,12 +596,38 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 11;
     background-color: rgba($color: #148e3c, $alpha: 0.5);
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
+    .x-icon-black{
+        position: fixed;
+        top: 5%;
+        right: 5%;
+        z-index: 11;
+        cursor: pointer;
+         transition: all 0.3s ease-in; 
+            &:hover{
+                .line{
+                    background: #fff;
+                  }
+                }
+        .line{
+            width: 35px;
+            height: 5px;
+            border-radius: 5px;
+            display: block;
+            background: black;
+        }
+       .line1{
+             transform: rotateZ(45deg) translateY(85%);
+       }
+       .line2{
+            transform: rotateZ(-45deg) translateY(-78%);
+       }
+    }
 }
 // ================= Order Window ===================
 .orderWindow {
@@ -514,7 +636,7 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
+    z-index: 12;
     width: 70%;
     height: 75%;
     display: none;
@@ -602,9 +724,12 @@ a {
     .number {
         display: block;
         position: absolute;
-        top: 55%;
+        top: 33%;
         left: 3%;
     }
+}
+.form-num-in{
+    position: relative;
 }
 // ================= Custom select ====================
 .custom-select {
@@ -668,7 +793,17 @@ a {
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-} // -------- order window end ------------
+}
+.form-error {
+    margin-top: 7px;
+    margin-left: 3px;
+}
+.is-danger {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: red;
+}
+// -------- order window end ------------
 // ==================== Product info section ===================
 .product-info {
     margin-bottom: 15px;
@@ -680,12 +815,22 @@ a {
 .product-img {
     flex: 1 1 25rem;
     display: flex;
+    position: relative;
     .pic {
         width: 400px;
         height: 400px;
-        cursor: zoom-in;
         margin-left: 88px;
         position: relative;
+        cursor: zoom-in;
+        .cursor{
+            width: 50px;
+            height: 30px;
+            background-color: rgba($color: #000000, $alpha: 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
         .detail {
             position: absolute;
             top: 0;
@@ -700,6 +845,9 @@ a {
         &:hover {
             .detail {
                 display: block;
+            }
+            .cursor {
+                display: unset;
             }
         }
     }
@@ -731,6 +879,12 @@ a {
         .current {
             border: 3px solid #148e3c;
         }
+    }
+    .list-mobil-left {
+        display: none;
+    }
+    .list-mobil-right {
+        display: none;
     }
 }
 // =============== Product info price ===================
@@ -870,6 +1024,12 @@ a {
         border: none;
         outline: none;
         border: 2px solid #148e3c;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            color: #fff;
+            background-color: #148e3c;
+        }
     }
     button:nth-child(1) {
         width: 132px;
@@ -967,11 +1127,12 @@ main {
 }
 
 .product-card {
-    flex: 1 1 15rem;
+    flex: 1 1 12rem;
     background-color: #ffffff;
-    margin: 12px;
+    margin: 6px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     position: relative;
+    transition: all 0.3s ease;
     .card-img {
         .card-img-in {
             width: 199px;
@@ -983,6 +1144,9 @@ main {
             }
         }
     }
+    &:hover {
+        transform: translateY(-8px);
+    }
 }
 
 .card-text {
@@ -993,6 +1157,7 @@ main {
         font-weight: bold;
         font-size: 16px;
         line-height: 19px;
+        height: 70px;
         color: #323232;
         margin-bottom: 9px;
     }
@@ -1016,7 +1181,7 @@ main {
         font-family: "Roboto Bold", sans-serif;
         font-style: normal;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 15px;
         line-height: 21px;
         color: #148e3c;
     }
@@ -1028,6 +1193,12 @@ main {
         width: 99px;
         height: 32px;
         border-radius: 2px;
+        transition: all 0.3s ease-in;
+        cursor: pointer;
+        &:hover {
+            background-color: #148e3c;
+            color: #fff;
+        }
     }
 }
 
@@ -1047,10 +1218,10 @@ main {
 
 @media (min-width: 1025px) and (max-width: 1280px) {
     // Product image price
-    .pro-img div {
-        width: 250px;
-        height: 250px;
-    }
+    // .pro-img div {
+    //     width: 250px;
+    //     height: 250px;
+    // }
     // Center Product
     main {
         width: 95%;
@@ -1066,66 +1237,7 @@ main {
     .body {
         margin-top: 90px;
     }
-    //================== Navbar Section ==============
-    .nav-link li {
-        font-size: 14px;
-    }
-    .navbar {
-        background: #148e3c !important;
-        position: fixed;
-        top: 0;
-        left: 100%;
-        width: 100%;
-        height: 100vh;
-        transition: transform 1s ease;
-        z-index: 3;
-    }
-    .navbar-inner {
-        padding: 20px;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-between;
 
-        .office-shop {
-            display: block !important;
-            p {
-                line-height: 22px;
-            }
-        }
-    }
-    .category-select {
-        color: #fff;
-    }
-    .nav-link {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-
-        li {
-            width: 100%;
-            height: 30px;
-            border-bottom: 1px solid #077507;
-            cursor: pointer;
-            a {
-                color: white !important;
-                font-size: 18px;
-            }
-        }
-        li:nth-child(1) a {
-            color: #e7ea09;
-        }
-    }
-
-    .nav-link a {
-        color: white !important;
-        font-size: 18px;
-    }
-    .nav-open {
-        transform: translateX(-100%);
-    }
     // Product image price
     .product-img {
         .pic {
@@ -1134,7 +1246,6 @@ main {
             margin: 0 auto;
             .detail {
                 left: 371px;
-                display: block;
                 width: 100%;
                 height: 100%;
             }
@@ -1177,66 +1288,6 @@ main {
     .body {
         margin-top: 90px;
     }
-    //================== Navbar Section ==============
-    .nav-link li {
-        font-size: 14px;
-    }
-    .navbar {
-        background: #148e3c !important;
-        position: fixed;
-        top: 0;
-        left: 100%;
-        width: 100%;
-        height: 100vh;
-        transition: transform 1s ease;
-        z-index: 3;
-    }
-    .navbar-inner {
-        padding: 20px;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-between;
-
-        .office-shop {
-            display: block !important;
-            p {
-                line-height: 22px;
-            }
-        }
-    }
-    .category-select {
-        color: #fff;
-    }
-    .nav-link {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-
-        li {
-            width: 100%;
-            height: 30px;
-            border-bottom: 1px solid #077507;
-            cursor: pointer;
-            a {
-                color: white !important;
-                font-size: 18px;
-            }
-        }
-        li:nth-child(1) a {
-            color: #e7ea09;
-        }
-    }
-
-    .nav-link a {
-        color: white !important;
-        font-size: 18px;
-    }
-    .nav-open {
-        transform: translateX(-100%);
-    }
     // Product image price
 
     .pro-img-price {
@@ -1254,6 +1305,43 @@ main {
                 left: unset;
                 width: 100%;
                 height: 100%;
+            }
+        }
+        .list {
+            display: none;
+        }
+        .list-mobil-left {
+            margin: 0 10px;
+            position: absolute;
+            z-index: 3;
+            display: block;
+            li {
+                display: block;
+                width: 56px;
+                height: 56px;
+                border: 1px solid #148e3c;
+                margin: 5px 0;
+            }
+            .current-left {
+                border: 3px solid #148e3c;
+            }
+        }
+        .list-mobil-right {
+            margin: 0 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            display: block;
+            li {
+                display: block;
+                width: 56px;
+                height: 56px;
+                border: 1px solid #148e3c;
+                margin: 5px 0;
+            }
+            .current-right {
+                border: 3px solid #148e3c;
             }
         }
     }
@@ -1295,9 +1383,15 @@ main {
         height: 97%;
         justify-content: space-around;
     }
-    .order-header p {
-        font-size: 18px;
-    }
+   .order-header{
+        img {
+            width: 35%;
+        }
+        p {
+            font-size: 18px;
+            }
+    } 
+    .order-header 
     .form-input {
         margin: 7px;
         input,
@@ -1306,7 +1400,7 @@ main {
         }
     }
     .order-button {
-        width: 40%;
+        width: 75%;
         height: 45px;
         font-size: 16px;
     }
@@ -1316,7 +1410,7 @@ main {
     ##Device = Most of the Smartphones Mobiles (Portrait)
     ##Screen = B/w 320px to 479px
   */
-@media (min-width: 350px) and (max-width: 480px) {
+@media (min-width: 320px) and (max-width: 480px) {
     .body {
         margin-top: 90px;
     }
@@ -1327,30 +1421,57 @@ main {
     }
     .product-img {
         flex: 1 1 16rem;
-        .list {
-            li {
-                width: 45px;
-                height: 45px;
-            }
-            li:nth-child(1) {
-                margin-top: 0;
-            }
-        }
         .pic {
             width: 250px;
             height: 233px;
             margin: 0 auto;
             .detail {
                 top: unset;
-                left: unset;
-                width: 100%;
-                height: 100%;
+                left: -52px;
+                width: 100vw;
+                height: 50vh;
+            }
+        }
+        .list {
+            display: none;
+        }
+        .list-mobil-left {
+            margin: 0 10px;
+            position: absolute;
+            z-index: 3;
+            display: block;
+            li {
+                display: block;
+                width: 45px;
+                height: 45px;
+                border: 1px solid #148e3c;
+                margin: 5px 0;
+            }
+            .current-left {
+                border: 3px solid #148e3c;
+            }
+        }
+        .list-mobil-right {
+            margin: 0 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            display: block;
+            li {
+                display: block;
+                width: 45px;
+                height: 45px;
+                border: 1px solid #148e3c;
+                margin: 5px 0;
+            }
+            .current-right {
+                border: 3px solid #148e3c;
             }
         }
     }
     .pro-price {
         flex: 1 1 20rem;
-        margin-left: 56px;
         .price-info {
             padding: 0 30px;
         }
@@ -1382,6 +1503,9 @@ main {
         margin: 0 auto;
     }
     // Order window
+    .fullCover .x-icon-black {
+    right: 3%;
+}
     .orderWindow {
         height: 95%;
     }
@@ -1389,9 +1513,14 @@ main {
         height: 97%;
         justify-content: space-around;
     }
-    .order-header p {
-        font-size: 16px;
-    }
+    .order-header{
+        img {
+            width: 54%;
+        }
+        p {
+           font-size: 16px;
+            }
+    } 
     .form-input {
         margin: 7px;
         input,
@@ -1400,7 +1529,7 @@ main {
         }
     }
     .order-button {
-        width: 40%;
+        width: 75%;
         height: 45px;
         font-size: 14px;
     }

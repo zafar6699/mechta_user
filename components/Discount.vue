@@ -7,7 +7,7 @@
                         <Carousel v-bind="settings">
                             <div
                                 class="card-slider"
-                                v-for="(item, index) in sliderProduct"
+                                v-for="(item, index) of sliderProduct"
                                 :key="index"
                             >
                                 <div class="product-card">
@@ -16,19 +16,18 @@
                                     </div>
                                     <div class="card-img">
                                         <div class="card-img-in">
-                                            <img
-                                                src="@/assets/image/qozon.png"
-                                            />
+                                             <img src="@/assets/image/qozon.png" />
                                         </div>
                                     </div>
                                     <div class="card-text">
                                         <p class="info-pro">
-                                            Сковорода - гриль с крышкойи
-                                            несъемной ручкой «Гранит» 26*26 см
+                                            {{ item.nameRu }}
                                         </p>
                                         <span>Серия Гранит</span>
                                         <div class="price-savat">
-                                            <p class="price">190,000 Сум</p>
+                                            <p class="price">
+                                                {{ item.price }} Сум
+                                            </p>
                                             <button type="button">
                                                 В Корзину
                                             </button>
@@ -68,7 +67,7 @@ export default {
     data() {
         return {
             // data from server
-            sliderProduct: [1, 4, 6, 7, 5, 4, 43],
+            sliderProduct: 'salom',
             // slider
             settings: {
                 dots: true,
@@ -123,7 +122,8 @@ export default {
         let respon = await this.$axios.$get(
             "http://mechta-posuda.uz:3000/api/product"
         );
-        console.log("discount slider", respon);
+        this.sliderProduct = respon.slice(0, 11);
+        console.log("discount slide --->",  this.sliderProduct);
     }
 };
 </script>
@@ -247,10 +247,11 @@ main {
         .card-img-in {
             width: 199px;
             height: 199px;
-            margin: 0 auto;
+            margin: 0 auto
             img {
                 width: 100%;
                 height: 100%;
+                cursor: pointer;
             }
         }
     }
